@@ -18,6 +18,20 @@ class CharactersViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if let identifier = segue.identifier {
+//            switch identifier {
+//            case "CharacterDetailsSegue":
+//                if let detailsViewController = segue.destination as? DetailsViewController {
+//                    if let indexPath = self.charactersCollectionView.indexPathsForSelectedItems?.last {
+//                        detailsViewController.characterNameLabel.text = "\(Data.charactersArray[indexPath.item].name)"
+//                    }
+//                }
+//            default:
+//                break
+//            }
+//        }
+//    }
 
 }
 
@@ -29,11 +43,12 @@ extension CharactersViewController: UICollectionViewDataSource, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return Data.charactersArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = charactersCollectionView.dequeueReusableCell(withReuseIdentifier: "CharactersCell", for: indexPath) as! CharactersCollectionViewCell
+        cell.characterNameLabel.text = Data.charactersArray[indexPath.row].name
         return cell
     }
     

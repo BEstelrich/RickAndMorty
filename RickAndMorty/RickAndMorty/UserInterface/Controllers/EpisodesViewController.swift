@@ -12,10 +12,15 @@ class EpisodesViewController: UIViewController  {
     
     @IBOutlet weak var episodesCollectionView: UICollectionView!
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupEpisodesCollectionView()
+        NetworkRequest().handler()
+        NotificationCenter.default.addObserver(self, selector: #selector(EpisodesViewController.reloadInterface), name:NSNotification.Name(rawValue: "reloadInterface"), object: nil)
     }
+    
 
 
 }
@@ -28,11 +33,15 @@ extension EpisodesViewController: UICollectionViewDataSource, UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        print("Number of rows")
+        return Data.episodesArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = episodesCollectionView.dequeueReusableCell(withReuseIdentifier: "EpisodesCell", for: indexPath) as! EpisodesCollectionViewCell
+        cell.episodeNumberLabel.text = Data.episodesArray[indexPath.row].episode
+        cell.episodeTitleLabel.text = Data.episodesArray[indexPath.row].name
+        cell.episodeDateLabel.text = Data.episodesArray[indexPath.row].airDate
         return cell
     }
     
@@ -41,3 +50,8 @@ extension EpisodesViewController: UICollectionViewDataSource, UICollectionViewDe
     }
 }
 
+extension EpisodesViewController: InterfaceDelegate {
+    @objc func reloadInterface() {
+        episodesCollectionView.reloadData()
+    }
+}
