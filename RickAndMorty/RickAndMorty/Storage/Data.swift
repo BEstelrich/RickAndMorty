@@ -11,4 +11,6 @@ import Foundation
 class Data {
     static var episodesArray = [Episodes]()
     static var charactersArray = [Characters]()
+    static var currentEpisodeAliveCharacters = [Characters]()
+    static var currentEpisodeDeadCharacters = [Characters]()
 }

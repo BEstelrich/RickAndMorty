@@ -18,10 +18,10 @@ class EpisodesViewController: UIViewController  {
         super.viewDidLoad()
         setupEpisodesCollectionView()
         NetworkRequest().handler()
-        NotificationCenter.default.addObserver(self, selector: #selector(EpisodesViewController.reloadInterface), name:NSNotification.Name(rawValue: "reloadInterface"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(EpisodesViewController.reloadInterface), name:NSNotification.Name(rawValue: Constants.Observers.reloadEpisodesCollectionView), object: nil)
+        
+        
     }
-    
-
 
 }
 
@@ -33,12 +33,11 @@ extension EpisodesViewController: UICollectionViewDataSource, UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("Number of rows")
         return Data.episodesArray.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = episodesCollectionView.dequeueReusableCell(withReuseIdentifier: "EpisodesCell", for: indexPath) as! EpisodesCollectionViewCell
+        let cell = episodesCollectionView.dequeueReusableCell(withReuseIdentifier: Constants.Cells.episodeCell, for: indexPath) as! EpisodesCollectionViewCell
         cell.episodeNumberLabel.text = Data.episodesArray[indexPath.row].episode
         cell.episodeTitleLabel.text = Data.episodesArray[indexPath.row].name
         cell.episodeDateLabel.text = Data.episodesArray[indexPath.row].airDate
@@ -46,7 +45,18 @@ extension EpisodesViewController: UICollectionViewDataSource, UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 150, height: 150)
+        let padding: CGFloat = 100
+        if UIDevice.current.userInterfaceIdiom == .phone  {
+            return CGSize(width: UIScreen.main.bounds.width, height: 50)
+        } else if UIDevice.current.userInterfaceIdiom == .pad {
+            if UIApplication.shared.statusBarOrientation.isPortrait {
+                return CGSize(width: (UIScreen.main.bounds.width - padding)/2, height: 50)
+            } else {
+                return CGSize(width: (UIScreen.main.bounds.width - padding)/3, height: 50)
+            }
+        }
+        
+        return CGSize(width: UIScreen.main.bounds.width, height: 50)
     }
 }
 

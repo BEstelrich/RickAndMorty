@@ -22,17 +22,14 @@ class NetworkRequest {
 class RequestAPIData {
     
     func fetchEpisodes() {
-//        let url = URL(string: (APIAddresses().episodesURL)) ?? URL(string: "https://rickandmortyapi.com/api/episode/[1,2,3,4,5,6,7,8,9,10]")
-        let url = URL(string: (APIAddresses().episodesURL))
-        print(APIAddresses().episodesURL)
+        let url = URL(string: (APIAddresses.episodesURL))
         
         URLSession.shared.dataTask(with: url!) { (data, response, error) in
             do {
                 if error == nil {
                     Data.episodesArray = try JSONDecoder().decode([Episodes].self, from: data!)
-                    print(Data.episodesArray.count)
                     DispatchQueue.main.async {
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reloadInterface"), object: nil)
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: Constants.Observers.reloadEpisodesCollectionView), object: nil)
                     }
 
                 } else {
@@ -47,14 +44,12 @@ class RequestAPIData {
     }
     
     func fetchCharacters() {
-        let url = URL(string: APIAddresses().charactersURL)
-        print(APIAddresses().charactersURL)
+        let url = URL(string: APIAddresses.charactersURL)
         
         URLSession.shared.dataTask(with: url!) { (data, response, error) in
             do {
                 if error == nil {
                     Data.charactersArray = try JSONDecoder().decode([Characters].self, from: data!)
-                    print(Data.charactersArray.count)
                 } else {
                     print("There is an error: \(error.debugDescription)")
                 }
@@ -79,9 +74,7 @@ class ParseAPIData {
 
 class APIAddresses {
 
-//    let charactersURL = "https://rickandmortyapi.com/api/character/[1,2,3,4,5,6,7,8,9,10]"
-    
-    var charactersURL: String {
+    static var charactersURL: String {
         var charactersNumbers = String()
         
         for number in 1...492 {
@@ -91,7 +84,7 @@ class APIAddresses {
     }
     
     
-    var episodesURL: String {
+    static var episodesURL: String {
         var episodesNumbers = String()
         
         for number in 1...30 {
