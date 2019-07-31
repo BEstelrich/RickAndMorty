@@ -12,15 +12,26 @@ class EpisodesViewController: UIViewController  {
     
     @IBOutlet weak var episodesCollectionView: UICollectionView!
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupEpisodesCollectionView()
         NetworkRequest().handler()
         NotificationCenter.default.addObserver(self, selector: #selector(EpisodesViewController.reloadInterface), name:NSNotification.Name(rawValue: Constants.Observers.reloadEpisodesCollectionView), object: nil)
-        
-        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier {
+            switch identifier {
+            case Constants.Segues.episodeCharactersSegue:
+                if let charactersViewController = segue.destination as? CharactersViewController {
+                    if let indexPath = self.episodesCollectionView.indexPathsForSelectedItems?.last {
+                        charactersViewController.characters = Data.episodesArray[indexPath.row].characters
+                    }
+                }
+            default:
+                break
+            }
+        }
     }
 
 }

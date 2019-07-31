@@ -11,11 +11,19 @@ import UIKit
 class CharactersViewController: UIViewController {
     
     @IBOutlet weak var charactersCollectionView: UICollectionView!
+    @IBOutlet weak var navigationBarTitle: UINavigationItem!
+    
+    var characters = [String]()
+    var characterIDs = [Int]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCharactersCollectionView()
         // Do any additional setup after loading the view.
+        print(characters)
+        parseCharaters(characters: characters)
+        filterCharacters()
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -33,6 +41,21 @@ class CharactersViewController: UIViewController {
         }
     }
     
+    func parseCharaters(characters: [String]) -> [Int] {
+        characterIDs.removeAll()
+        for character in characters {
+            let initialIndex = character.index(character.startIndex, offsetBy: 42)
+            let extractedString = character[initialIndex...]
+            let integerConversion = Int(extractedString)
+            characterIDs.append(integerConversion!)
+        }
+        print(characterIDs)
+        return characterIDs
+    }
+    
+    func filterCharacters() {
+        Data.currentEpisodeCharacters = Data.charactersArray.filter({ characterIDs.contains($0.id) })
+    }
 
 }
 
@@ -44,15 +67,16 @@ extension CharactersViewController: UICollectionViewDataSource, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Data.charactersArray.count
+        return Data.currentEpisodeCharacters.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = charactersCollectionView.dequeueReusableCell(withReuseIdentifier: Constants.Cells.characterCell, for: indexPath) as! CharactersCollectionViewCell
-        cell.characterNameLabel.text = Data.charactersArray[indexPath.row].name
-        cell.characterImage.imageFromServerURL(urlString: Data.charactersArray[indexPath.row].image)
+        cell.characterNameLabel.text = Data.currentEpisodeCharacters[indexPath.row].name
+        cell.characterImage.imageFromServerURL(urlString: Data.currentEpisodeCharacters[indexPath.row].image)
         return cell
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 //        let padding: CGFloat = 10
