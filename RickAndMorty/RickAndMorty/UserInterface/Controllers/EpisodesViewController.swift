@@ -10,24 +10,35 @@ import UIKit
 
 class EpisodesViewController: UIViewController  {
     
+    // MARK: - IBOutlets
     @IBOutlet weak var episodesCollectionView: UICollectionView!
     
+    
+    // MARK: - ViewController lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupEpisodesCollectionView()
-        fetchData()
         setupObservers()
+        fetchData()
     }
     
-    func fetchData() {
+    
+    // MARK: - Local functions
+    private func fetchData() {
         let networkRequest = NetworkRequest()
         networkRequest.fetchingAPIs()
     }
     
-    func setupObservers() {
+    private func setupObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(EpisodesViewController.reloadInterface), name:NSNotification.Name(rawValue: Constants.Observers.reloadEpisodesCollectionView), object: nil)
     }
     
+    @objc private func reloadInterface() {
+        episodesCollectionView.reloadData()
+    }
+    
+    
+    // MARK: - Segues
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
             switch identifier {
@@ -46,9 +57,12 @@ class EpisodesViewController: UIViewController  {
 
 }
 
+
+// MARK: - Extensions
+// UIViewController conforming protocols functions.
 extension EpisodesViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
-    func setupEpisodesCollectionView() {
+    private func setupEpisodesCollectionView() {
         episodesCollectionView.delegate = self
         episodesCollectionView.dataSource = self
     }
@@ -69,11 +83,5 @@ extension EpisodesViewController: UICollectionViewDataSource, UICollectionViewDe
         let saveAreaWidth = view.safeAreaLayoutGuide.layoutFrame.size.width
         let cellSetup = CellSetup().setCell(width: saveAreaWidth, height: Constants.Design.cellHeight, padding: Constants.Design.cellPadding)
         return cellSetup
-    }
-}
-
-extension EpisodesViewController: InterfaceDelegate {
-    @objc func reloadInterface() {
-        episodesCollectionView.reloadData()
     }
 }

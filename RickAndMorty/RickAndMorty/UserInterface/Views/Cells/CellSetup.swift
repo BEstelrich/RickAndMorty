@@ -10,6 +10,13 @@ import UIKit
 
 class CellSetup {
 
+    /// This function defines cell size related to the number of columns we want to display in the screen.
+    ///
+    /// - Parameters:
+    ///   - customWidth: the cell width expected for the cell.
+    ///   - customHeight: the cell height expected for the cell.
+    ///   - customPadding: the minimum padding between cells.
+    /// - Returns: returns a CGSize that can passed throught collection view controller protocol functions to generate the actual cell size.
     func setCell(width customWidth: CGFloat, height customHeight: CGFloat, padding customPadding: CGFloat) -> CGSize {
         if UIDevice.current.userInterfaceIdiom == .phone  {
             return (UIApplication.shared.statusBarOrientation.isPortrait == true) ? CGSize(width: customWidth - customPadding, height: customHeight) : CGSize(width: (customWidth - customPadding)/2, height: customHeight)

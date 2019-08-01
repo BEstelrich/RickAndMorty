@@ -10,13 +10,18 @@ import UIKit
 
 class CharactersViewController: UIViewController {
     
+    // MARK: - IBOutlets
     @IBOutlet weak var navigationBarTitle: UINavigationItem!
     @IBOutlet weak var charactersCollectionView: UICollectionView!
     
+    
+    // MARK: - Variables
     var episodeCharacters = [String]()
     var characterIDs = [Int]()
     var episodeTitle = String()
     
+    
+    // MARK: - ViewController lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCharactersCollectionView()
@@ -30,22 +35,9 @@ class CharactersViewController: UIViewController {
         charactersCollectionView.reloadData()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let identifier = segue.identifier {
-            switch identifier {
-            case Constants.Segues.characterDetailsSegue:
-                if let detailsViewController = segue.destination as? DetailsViewController {
-                    if let indexPath = self.charactersCollectionView.indexPathsForSelectedItems?.last {
-                        detailsViewController.character = Data.currentEpisodeCharacters[indexPath.item]
-                    }
-                }
-            default:
-                break
-            }
-        }
-    }
     
-    func extractCharactersFromEpisodes(_ episodeCharacters: [String]) {
+    // MARK: - Local functions
+    private func extractCharactersFromEpisodes(_ episodeCharacters: [String]) {
         characterIDs.removeAll()
         for character in episodeCharacters {
             let initialIndex = character.index(character.startIndex, offsetBy: 42)
@@ -55,16 +47,35 @@ class CharactersViewController: UIViewController {
         }
     }
     
-    func filterCharacters() {
+    private func filterCharacters() {
         Data.currentEpisodeCharacters = Data.charactersArray.filter({ characterIDs.contains($0.id) })
     }
     
+    
+    // MARK: - Segues
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier {
+            switch identifier {
+            case Constants.Segues.characterDetailsSegue:
+                if let detailsViewController = segue.destination as? DetailsViewController {
+                    if let indexPath = self.charactersCollectionView.indexPathsForSelectedItems?.last {
+                        detailsViewController.currentCharacter = Data.currentEpisodeCharacters[indexPath.item]
+                    }
+                }
+            default:
+                break
+            }
+        }
+    }
 
 }
 
+
+// MARK: - Extensions
+// UIViewController conforming protocols functions.
 extension CharactersViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
-    func setupCharactersCollectionView() {
+    private func setupCharactersCollectionView() {
         charactersCollectionView.delegate = self
         charactersCollectionView.dataSource = self
     }
@@ -81,9 +92,7 @@ extension CharactersViewController: UICollectionViewDataSource, UICollectionView
         cell.characterImage.fetchImageFromString(Data.currentEpisodeCharacters[indexPath.row].image)
         cell.characterStatusImage.image = (Data.currentEpisodeCharacters[indexPath.row].status.rawValue == "Alive") ? Constants.Images.aliveStatusImage :   (Data.currentEpisodeCharacters[indexPath.row].status.rawValue == "Dead") ? Constants.Images.deadStatusImage : Constants.Images.unknownStatusImage
         return cell
-
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 125, height: 150)

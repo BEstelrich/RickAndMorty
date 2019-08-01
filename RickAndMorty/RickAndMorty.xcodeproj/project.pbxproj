@@ -10,7 +10,6 @@
 		C968C97F22F0DB4B0025AF1E /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C968C97E22F0DB4B0025AF1E /* NetworkRequest.swift */; };
 		C968C98122F0DB650025AF1E /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = C968C98022F0DB650025AF1E /* Character.swift */; };
 		C968C98322F0DBC40025AF1E /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = C968C98222F0DBC40025AF1E /* Data.swift */; };
-		C968C98522F0E2CE0025AF1E /* UserInterfaceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C968C98422F0E2CE0025AF1E /* UserInterfaceProtocol.swift */; };
 		C97BCE8822F25B46002C2F63 /* KillButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97BCE8722F25B46002C2F63 /* KillButton.swift */; };
 		C97BCE8A22F25C97002C2F63 /* CellSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97BCE8922F25C97002C2F63 /* CellSetup.swift */; };
 		C9A8C26B22EF86B400CC79A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A8C26A22EF86B400CC79A2 /* AppDelegate.swift */; };
@@ -31,7 +30,6 @@
 		C968C97E22F0DB4B0025AF1E /* NetworkRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
 		C968C98022F0DB650025AF1E /* Character.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		C968C98222F0DBC40025AF1E /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
-		C968C98422F0E2CE0025AF1E /* UserInterfaceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInterfaceProtocol.swift; sourceTree = "<group>"; };
 		C97BCE8722F25B46002C2F63 /* KillButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KillButton.swift; sourceTree = "<group>"; };
 		C97BCE8922F25C97002C2F63 /* CellSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellSetup.swift; sourceTree = "<group>"; };
 		C9A8C26722EF86B400CC79A2 /* RickAndMorty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMorty.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -61,6 +59,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C94A0CF922F336CE00236E50 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				C9A8C28922EF907700CC79A2 /* EpisodesCollectionViewCell.swift */,
+				C9A8C28D22EFA24F00CC79A2 /* CharactersCollectionViewCell.swift */,
+				C97BCE8922F25C97002C2F63 /* CellSetup.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		C9A8C25E22EF86B400CC79A2 = {
 			isa = PBXGroup;
 			children = (
@@ -83,7 +91,6 @@
 				C9A8C27F22EF875400CC79A2 /* SupportingFiles */,
 				C9A8C28022EF877100CC79A2 /* UserInterface */,
 				C9A8C28422EF87BA00CC79A2 /* Storage */,
-				C9EC10E322F1D41400DF3EDD /* Resources */,
 				C9A8C28622EF880300CC79A2 /* Services */,
 			);
 			path = RickAndMorty;
@@ -122,10 +129,8 @@
 			children = (
 				C9A8C27622EF86B500CC79A2 /* LaunchScreen.storyboard */,
 				C9A8C26E22EF86B400CC79A2 /* Main.storyboard */,
-				C9A8C28922EF907700CC79A2 /* EpisodesCollectionViewCell.swift */,
-				C9A8C28D22EFA24F00CC79A2 /* CharactersCollectionViewCell.swift */,
+				C94A0CF922F336CE00236E50 /* Cells */,
 				C97BCE8722F25B46002C2F63 /* KillButton.swift */,
-				C97BCE8922F25C97002C2F63 /* CellSetup.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -136,7 +141,6 @@
 				C9A8C26C22EF86B400CC79A2 /* EpisodesViewController.swift */,
 				C9A8C28B22EFA00600CC79A2 /* CharactersViewController.swift */,
 				C9A8C28F22EFA44500CC79A2 /* DetailsViewController.swift */,
-				C968C98422F0E2CE0025AF1E /* UserInterfaceProtocol.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -146,6 +150,7 @@
 			children = (
 				C9EC10E422F1D42D00DF3EDD /* Constants.swift */,
 				C968C98222F0DBC40025AF1E /* Data.swift */,
+				C9EC10E322F1D41400DF3EDD /* Resources */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -251,7 +256,6 @@
 				C97BCE8A22F25C97002C2F63 /* CellSetup.swift in Sources */,
 				C9EC10E222F1CC5300DF3EDD /* Extensions.swift in Sources */,
 				C9A8C29022EFA44500CC79A2 /* DetailsViewController.swift in Sources */,
-				C968C98522F0E2CE0025AF1E /* UserInterfaceProtocol.swift in Sources */,
 				C9A8C28E22EFA24F00CC79A2 /* CharactersCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

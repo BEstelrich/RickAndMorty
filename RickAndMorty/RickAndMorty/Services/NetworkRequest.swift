@@ -9,8 +9,10 @@
 import UIKit
 
 class NetworkRequest {
-    let requestAPIData = RequestAPIData()
+    private let requestAPIData = RequestAPIData()
     
+    
+    /// Handles all API requests.
     func fetchingAPIs()  {
         requestAPIData.fetchEpisodes()
         requestAPIData.fetchCharacters()
@@ -19,6 +21,8 @@ class NetworkRequest {
 
 class RequestAPIData {
     
+    /// Fetch Episodes from the API.
+    /// This method fetchs data straight to model if model classes are conformed to Codable protocol.
     func fetchEpisodes() {
         let url = URL(string: (Constants.API.episodesURL))
         
@@ -41,6 +45,8 @@ class RequestAPIData {
         }.resume()
     }
     
+    /// Fetch Characters from the API.
+    /// This method fetchs data straight to model if model classes are conformed to Codable protocol.
     func fetchCharacters() {
         let url = URL(string: Constants.API.charactersURL)
         

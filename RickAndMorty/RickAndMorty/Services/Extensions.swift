@@ -10,6 +10,9 @@ import UIKit
 
 extension UIImageView {
 
+    /// Fetch image asynchronously from API.
+    ///
+    /// - Parameter string: that's the link from the API.
     public func fetchImageFromString(_ string: String) {
         self.image = nil
         URLSession.shared.dataTask(with: NSURL(string: string)! as URL, completionHandler: { (data, response, error) -> Void in

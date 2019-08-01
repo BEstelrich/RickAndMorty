@@ -9,7 +9,7 @@
 import Foundation
 
 class Data {
-    static var episodesArray = [Episode]()
-    static var charactersArray = [Character]()
-    static var currentEpisodeCharacters = [Character]()
+    public static var episodesArray = [Episode]()
+    public static var charactersArray = [Character]()
+    public static var currentEpisodeCharacters = [Character]()
 }
