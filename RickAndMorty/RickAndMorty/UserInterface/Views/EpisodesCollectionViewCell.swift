@@ -9,9 +9,7 @@
 import UIKit
 
 class EpisodesCollectionViewCell: UICollectionViewCell {
-    
     @IBOutlet weak var episodeNumberLabel: UILabel!
     @IBOutlet weak var episodeTitleLabel: UILabel!
     @IBOutlet weak var episodeDateLabel: UILabel!
-
 }

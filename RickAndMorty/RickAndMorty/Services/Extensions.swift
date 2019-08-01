@@ -10,11 +10,9 @@ import UIKit
 
 extension UIImageView {
 
-    public func imageFromServerURL(urlString: String) {
+    public func fetchImageFromString(_ string: String) {
         self.image = nil
-        let urlStringNew = urlString.replacingOccurrences(of: " ", with: "%20")
-        URLSession.shared.dataTask(with: NSURL(string: urlStringNew)! as URL, completionHandler: { (data, response, error) -> Void in
-            
+        URLSession.shared.dataTask(with: NSURL(string: string)! as URL, completionHandler: { (data, response, error) -> Void in
             if error != nil {
                 print(error as Any)
                 return
@@ -23,7 +21,7 @@ extension UIImageView {
                 let image = UIImage(data: data!)
                 self.image = image
             })
-            
         }).resume()
     }
+    
 }

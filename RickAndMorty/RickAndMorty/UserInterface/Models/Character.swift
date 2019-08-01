@@ -1,5 +1,5 @@
 //
-//  Characters.swift
+//  Character.swift
 //  RickAndMorty
 //
 //  Created by BES on 2019-07-29.
@@ -8,14 +8,15 @@
 
 import Foundation
 
-struct Characters: Codable {
+struct Character: Codable {
     let id: Int
     let name: String
-    let status: Status
+    var status: Status
     let species: Species
     let type: String
     let gender: Gender
-    let origin, location: Location
+    let origin: Location
+    let location: Location
     let image: String
     let episode: [String]
     let url: String

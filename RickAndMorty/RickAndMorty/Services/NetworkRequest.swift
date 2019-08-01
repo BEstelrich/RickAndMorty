@@ -10,24 +10,22 @@ import UIKit
 
 class NetworkRequest {
     let requestAPIData = RequestAPIData()
-    let parseAPIData = ParseAPIData()
     
-    func handler()  {
+    func fetchingAPIs()  {
         requestAPIData.fetchEpisodes()
         requestAPIData.fetchCharacters()
-
     }
 }
 
 class RequestAPIData {
     
     func fetchEpisodes() {
-        let url = URL(string: (APIAddresses.episodesURL))
+        let url = URL(string: (Constants.API.episodesURL))
         
         URLSession.shared.dataTask(with: url!) { (data, response, error) in
             do {
                 if error == nil {
-                    Data.episodesArray = try JSONDecoder().decode([Episodes].self, from: data!)
+                    Data.episodesArray = try JSONDecoder().decode([Episode].self, from: data!)
                     DispatchQueue.main.async {
                         NotificationCenter.default.post(name: NSNotification.Name(rawValue: Constants.Observers.reloadEpisodesCollectionView), object: nil)
                     }
@@ -44,12 +42,12 @@ class RequestAPIData {
     }
     
     func fetchCharacters() {
-        let url = URL(string: APIAddresses.charactersURL)
+        let url = URL(string: Constants.API.charactersURL)
         
         URLSession.shared.dataTask(with: url!) { (data, response, error) in
             do {
                 if error == nil {
-                    Data.charactersArray = try JSONDecoder().decode([Characters].self, from: data!)
+                    Data.charactersArray = try JSONDecoder().decode([Character].self, from: data!)
                 } else {
                     print("There is an error: \(error.debugDescription)")
                 }
@@ -60,37 +58,3 @@ class RequestAPIData {
             }.resume()
     }
 }
-
-class ParseAPIData {
-    func parseEpisodes() {
-        
-    }
-    
-    func parseCharacters() {
-        
-    }
-}
-
-
-class APIAddresses {
-
-    static var charactersURL: String {
-        var charactersNumbers = String()
-        
-        for number in 1...492 {
-            charactersNumbers += "\(number),"
-        }
-        return "https://rickandmortyapi.com/api/character/\(charactersNumbers)" + "493"
-    }
-    
-    
-    static var episodesURL: String {
-        var episodesNumbers = String()
-        
-        for number in 1...30 {
-            episodesNumbers += "\(number),"
-        }
-        return "https://rickandmortyapi.com/api/episode/\(episodesNumbers)" + "31"
-    }
-}
-

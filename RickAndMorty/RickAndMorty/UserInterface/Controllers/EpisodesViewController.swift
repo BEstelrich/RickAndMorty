@@ -15,7 +15,16 @@ class EpisodesViewController: UIViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupEpisodesCollectionView()
-        NetworkRequest().handler()
+        fetchData()
+        setupObservers()
+    }
+    
+    func fetchData() {
+        let networkRequest = NetworkRequest()
+        networkRequest.fetchingAPIs()
+    }
+    
+    func setupObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(EpisodesViewController.reloadInterface), name:NSNotification.Name(rawValue: Constants.Observers.reloadEpisodesCollectionView), object: nil)
     }
     
@@ -25,7 +34,8 @@ class EpisodesViewController: UIViewController  {
             case Constants.Segues.episodeCharactersSegue:
                 if let charactersViewController = segue.destination as? CharactersViewController {
                     if let indexPath = self.episodesCollectionView.indexPathsForSelectedItems?.last {
-                        charactersViewController.characters = Data.episodesArray[indexPath.row].characters
+                        charactersViewController.episodeCharacters = Data.episodesArray[indexPath.row].characters
+                        charactersViewController.episodeTitle = Data.episodesArray[indexPath.row].episode
                     }
                 }
             default:
@@ -56,18 +66,9 @@ extension EpisodesViewController: UICollectionViewDataSource, UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let padding: CGFloat = 100
-        if UIDevice.current.userInterfaceIdiom == .phone  {
-            return CGSize(width: UIScreen.main.bounds.width, height: 50)
-        } else if UIDevice.current.userInterfaceIdiom == .pad {
-            if UIApplication.shared.statusBarOrientation.isPortrait {
-                return CGSize(width: (UIScreen.main.bounds.width - padding)/2, height: 50)
-            } else {
-                return CGSize(width: (UIScreen.main.bounds.width - padding)/3, height: 50)
-            }
-        }
-        
-        return CGSize(width: UIScreen.main.bounds.width, height: 50)
+        let saveAreaWidth = view.safeAreaLayoutGuide.layoutFrame.size.width
+        let cellSetup = CellSetup().setCell(width: saveAreaWidth, height: Constants.Design.cellHeight, padding: Constants.Design.cellPadding)
+        return cellSetup
     }
 }
 

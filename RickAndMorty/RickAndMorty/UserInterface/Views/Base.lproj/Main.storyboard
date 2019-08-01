@@ -118,7 +118,7 @@
             </objects>
             <point key="canvasLocation" x="1566.6666666666667" y="-535.04464285714278"/>
         </scene>
-        <!--Characters-->
+        <!--Episode Characters-->
         <scene sceneID="o5m-WJ-7Kg">
             <objects>
                 <viewController id="qcZ-Rn-TlF" customClass="CharactersViewController" customModule="RickAndMorty" customModuleProvider="target" sceneMemberID="viewController">
@@ -127,7 +127,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="f3Y-zn-bbo">
-                                <rect key="frame" x="0.0" y="153" width="414" height="743"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="iNw-h2-ZIb">
                                     <size key="itemSize" width="125" height="150"/>
@@ -155,12 +155,21 @@
                                                         <constraint firstAttribute="width" secondItem="QH5-pY-raX" secondAttribute="height" multiplier="1:1" id="bn5-1e-Bl4"/>
                                                     </constraints>
                                                 </imageView>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AliveStatusImage" translatesAutoresizingMaskIntoConstraints="NO" id="7Km-jw-lN1">
+                                                    <rect key="frame" x="85" y="0.0" width="40" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="MJf-o5-GBb"/>
+                                                        <constraint firstAttribute="width" constant="40" id="Zbz-Eg-nt0"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="wtI-Mm-HnZ" secondAttribute="bottom" id="4lQ-40-EP8"/>
+                                            <constraint firstItem="7Km-jw-lN1" firstAttribute="top" secondItem="o9y-99-y0R" secondAttribute="top" id="8og-mD-XSN"/>
                                             <constraint firstAttribute="trailing" secondItem="wtI-Mm-HnZ" secondAttribute="trailing" id="Doy-NC-bBM"/>
+                                            <constraint firstAttribute="trailing" secondItem="7Km-jw-lN1" secondAttribute="trailing" id="Gmj-c8-Rqa"/>
                                             <constraint firstItem="QH5-pY-raX" firstAttribute="leading" secondItem="o9y-99-y0R" secondAttribute="leading" id="Rhn-YO-Oh9"/>
                                             <constraint firstItem="wtI-Mm-HnZ" firstAttribute="top" secondItem="QH5-pY-raX" secondAttribute="bottom" id="Vir-it-6EP"/>
                                             <constraint firstItem="QH5-pY-raX" firstAttribute="top" secondItem="o9y-99-y0R" secondAttribute="top" id="kPW-mh-UVo"/>
@@ -170,39 +179,26 @@
                                         <connections>
                                             <outlet property="characterImage" destination="QH5-pY-raX" id="jse-fh-Cqa"/>
                                             <outlet property="characterNameLabel" destination="wtI-Mm-HnZ" id="0TX-48-5DO"/>
+                                            <outlet property="characterStatusImage" destination="7Km-jw-lN1" id="rRq-Rm-HDq"/>
                                             <segue destination="ebi-fO-43g" kind="show" identifier="CharacterDetailsSegue" id="Sj0-4o-tfP"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="0VI-TA-1he">
-                                <rect key="frame" x="64.666666666666686" y="108" width="285" height="26"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="25" id="K73-Bo-UIg"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="285" id="e0N-vH-Or9"/>
-                                </constraints>
-                                <segments>
-                                    <segment title="All"/>
-                                    <segment title="Alive"/>
-                                    <segment title="Dead"/>
-                                </segments>
-                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="f3Y-zn-bbo" firstAttribute="top" secondItem="0VI-TA-1he" secondAttribute="bottom" constant="20" id="7Ig-74-6nN"/>
                             <constraint firstItem="f3Y-zn-bbo" firstAttribute="leading" secondItem="p3w-Sh-RBd" secondAttribute="leading" id="Kip-ht-f9Y"/>
                             <constraint firstItem="f3Y-zn-bbo" firstAttribute="trailing" secondItem="p3w-Sh-RBd" secondAttribute="trailing" id="NV7-Pp-5gd"/>
+                            <constraint firstItem="f3Y-zn-bbo" firstAttribute="top" secondItem="p3w-Sh-RBd" secondAttribute="top" id="OpQ-p8-UWh"/>
                             <constraint firstAttribute="bottom" secondItem="f3Y-zn-bbo" secondAttribute="bottom" id="bbb-Ce-pHx"/>
-                            <constraint firstItem="0VI-TA-1he" firstAttribute="centerX" secondItem="0jy-Q8-rdh" secondAttribute="centerX" id="gF6-V2-89A"/>
-                            <constraint firstItem="0VI-TA-1he" firstAttribute="top" secondItem="p3w-Sh-RBd" secondAttribute="top" constant="20" id="gm1-Dr-6iB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="p3w-Sh-RBd"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Characters" id="S33-bW-ezF"/>
+                    <navigationItem key="navigationItem" title="Episode Characters" id="S33-bW-ezF"/>
                     <connections>
                         <outlet property="charactersCollectionView" destination="f3Y-zn-bbo" id="Xht-VO-4wv"/>
-                        <outlet property="navigationBarTitle" destination="S33-bW-ezF" id="e2T-Ua-TfV"/>
+                        <outlet property="navigationBarTitle" destination="S33-bW-ezF" id="DfP-9M-j4S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="flj-hR-ubo" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -223,7 +219,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="tOB-h6-QxN">
                                         <rect key="frame" x="0.0" y="0.0" width="314" height="348"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CharacerPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="JNk-3f-gDT">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="JNk-3f-gDT">
                                                 <rect key="frame" x="0.0" y="0.0" width="314" height="314"/>
                                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                 <constraints>
@@ -333,26 +329,27 @@
                                     <constraint firstAttribute="width" priority="900" constant="400" id="HKK-Yk-d3J"/>
                                 </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JV9-Ix-IGj">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JV9-Ix-IGj" customClass="KillButton" customModule="RickAndMorty" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="821" width="414" height="75"/>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="75" id="8us-BW-4Ez"/>
                                 </constraints>
-                                <state key="normal">
-                                    <attributedString key="attributedTitle">
-                                        <fragment content="KILL">
-                                            <attributes>
-                                                <color key="NSColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <font key="NSFont" size="24" name="SFCompactRounded-Black"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <state key="normal" title="Kill">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
                                     <action selector="tapToKill:" destination="ebi-fO-43g" eventType="touchUpInside" id="ZjJ-FR-Okb"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AliveStatusImage" translatesAutoresizingMaskIntoConstraints="NO" id="Hwz-WF-PkF">
+                                <rect key="frame" x="284" y="138" width="80" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="TeH-2M-ISc"/>
+                                    <constraint firstAttribute="height" constant="80" id="amR-Fc-Jh1"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -362,20 +359,25 @@
                             <constraint firstItem="AHn-S8-pKy" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="rDg-mZ-17w" secondAttribute="leading" constant="50" id="ECp-uT-cTX"/>
                             <constraint firstItem="AHn-S8-pKy" firstAttribute="centerX" secondItem="GLc-sX-lW0" secondAttribute="centerX" id="PfY-Gb-U4r"/>
                             <constraint firstItem="JV9-Ix-IGj" firstAttribute="trailing" secondItem="GLc-sX-lW0" secondAttribute="trailing" id="SFm-Sy-NHr"/>
+                            <constraint firstItem="Hwz-WF-PkF" firstAttribute="top" secondItem="rDg-mZ-17w" secondAttribute="top" constant="50" id="Tgh-cO-Zoq"/>
                             <constraint firstAttribute="bottom" secondItem="JV9-Ix-IGj" secondAttribute="bottom" id="r7X-k3-qkQ"/>
+                            <constraint firstItem="rDg-mZ-17w" firstAttribute="trailing" secondItem="Hwz-WF-PkF" secondAttribute="trailing" constant="50" id="xbi-ex-okR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="rDg-mZ-17w"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Details" id="FCz-gp-Ij8"/>
+                    <navigationItem key="navigationItem" title="Character Details" id="FCz-gp-Ij8"/>
                     <connections>
+                        <outlet property="changeCharacterStatusButton" destination="JV9-Ix-IGj" id="3kS-Mf-BTt"/>
                         <outlet property="characterAvatarImage" destination="JNk-3f-gDT" id="ZSN-Lf-ElT"/>
                         <outlet property="characterGenderLabel" destination="4ZP-yY-SeW" id="tiX-b0-WC5"/>
                         <outlet property="characterLocationLabel" destination="DET-ZN-dVC" id="1mg-07-mOW"/>
                         <outlet property="characterNameLabel" destination="x2n-z3-oJl" id="Xk8-Ud-sAL"/>
                         <outlet property="characterOriginLabel" destination="rJw-XH-Jx4" id="DbD-Nd-Yua"/>
                         <outlet property="characterSpeciesLabel" destination="qun-iG-FUk" id="dwT-Rs-yvm"/>
+                        <outlet property="characterStatusImage" destination="Hwz-WF-PkF" id="WS6-A3-tI9"/>
                         <outlet property="characterStatusLabel" destination="BXN-2H-HhD" id="GhP-tK-R6O"/>
                         <outlet property="characterTypeLabel" destination="lUs-ka-pYB" id="1zR-vJ-4ab"/>
+                        <outlet property="navigationBarTitle" destination="FCz-gp-Ij8" id="6P6-cO-GF2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ufr-Jf-bfp" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -402,6 +404,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="CharacerPlaceholder" width="856" height="856"/>
+        <image name="AliveStatusImage" width="1000" height="1000"/>
+        <image name="Placeholder" width="1500" height="1500"/>
     </resources>
 </document>

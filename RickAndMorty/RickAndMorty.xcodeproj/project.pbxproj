@@ -11,6 +11,8 @@
 		C968C98122F0DB650025AF1E /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = C968C98022F0DB650025AF1E /* Character.swift */; };
 		C968C98322F0DBC40025AF1E /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = C968C98222F0DBC40025AF1E /* Data.swift */; };
 		C968C98522F0E2CE0025AF1E /* UserInterfaceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C968C98422F0E2CE0025AF1E /* UserInterfaceProtocol.swift */; };
+		C97BCE8822F25B46002C2F63 /* KillButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97BCE8722F25B46002C2F63 /* KillButton.swift */; };
+		C97BCE8A22F25C97002C2F63 /* CellSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97BCE8922F25C97002C2F63 /* CellSetup.swift */; };
 		C9A8C26B22EF86B400CC79A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A8C26A22EF86B400CC79A2 /* AppDelegate.swift */; };
 		C9A8C26D22EF86B400CC79A2 /* EpisodesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A8C26C22EF86B400CC79A2 /* EpisodesViewController.swift */; };
 		C9A8C27022EF86B400CC79A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9A8C26E22EF86B400CC79A2 /* Main.storyboard */; };
@@ -22,7 +24,7 @@
 		C9A8C29022EFA44500CC79A2 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A8C28F22EFA44500CC79A2 /* DetailsViewController.swift */; };
 		C9EC10E222F1CC5300DF3EDD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EC10E122F1CC5300DF3EDD /* Extensions.swift */; };
 		C9EC10E522F1D42D00DF3EDD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EC10E422F1D42D00DF3EDD /* Constants.swift */; };
-		C9EC10E722F1DDD500DF3EDD /* Episodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EC10E622F1DDD500DF3EDD /* Episodes.swift */; };
+		C9EC10E722F1DDD500DF3EDD /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EC10E622F1DDD500DF3EDD /* Episode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		C968C98022F0DB650025AF1E /* Character.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		C968C98222F0DBC40025AF1E /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		C968C98422F0E2CE0025AF1E /* UserInterfaceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInterfaceProtocol.swift; sourceTree = "<group>"; };
+		C97BCE8722F25B46002C2F63 /* KillButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KillButton.swift; sourceTree = "<group>"; };
+		C97BCE8922F25C97002C2F63 /* CellSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellSetup.swift; sourceTree = "<group>"; };
 		C9A8C26722EF86B400CC79A2 /* RickAndMorty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMorty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9A8C26A22EF86B400CC79A2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C9A8C26C22EF86B400CC79A2 /* EpisodesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesViewController.swift; sourceTree = "<group>"; };
@@ -43,7 +47,7 @@
 		C9A8C28F22EFA44500CC79A2 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		C9EC10E122F1CC5300DF3EDD /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		C9EC10E422F1D42D00DF3EDD /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		C9EC10E622F1DDD500DF3EDD /* Episodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episodes.swift; sourceTree = "<group>"; };
+		C9EC10E622F1DDD500DF3EDD /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,7 +111,7 @@
 		C9A8C28122EF878500CC79A2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				C9EC10E622F1DDD500DF3EDD /* Episodes.swift */,
+				C9EC10E622F1DDD500DF3EDD /* Episode.swift */,
 				C968C98022F0DB650025AF1E /* Character.swift */,
 			);
 			path = Models;
@@ -120,6 +124,8 @@
 				C9A8C26E22EF86B400CC79A2 /* Main.storyboard */,
 				C9A8C28922EF907700CC79A2 /* EpisodesCollectionViewCell.swift */,
 				C9A8C28D22EFA24F00CC79A2 /* CharactersCollectionViewCell.swift */,
+				C97BCE8722F25B46002C2F63 /* KillButton.swift */,
+				C97BCE8922F25C97002C2F63 /* CellSetup.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -138,6 +144,7 @@
 		C9A8C28422EF87BA00CC79A2 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
+				C9EC10E422F1D42D00DF3EDD /* Constants.swift */,
 				C968C98222F0DBC40025AF1E /* Data.swift */,
 			);
 			path = Storage;
@@ -156,7 +163,6 @@
 			isa = PBXGroup;
 			children = (
 				C9A8C27422EF86B500CC79A2 /* Assets.xcassets */,
-				C9EC10E422F1D42D00DF3EDD /* Constants.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -233,14 +239,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				C968C98122F0DB650025AF1E /* Character.swift in Sources */,
-				C9EC10E722F1DDD500DF3EDD /* Episodes.swift in Sources */,
+				C9EC10E722F1DDD500DF3EDD /* Episode.swift in Sources */,
 				C968C98322F0DBC40025AF1E /* Data.swift in Sources */,
+				C97BCE8822F25B46002C2F63 /* KillButton.swift in Sources */,
 				C9A8C28A22EF907700CC79A2 /* EpisodesCollectionViewCell.swift in Sources */,
 				C9A8C26D22EF86B400CC79A2 /* EpisodesViewController.swift in Sources */,
 				C968C97F22F0DB4B0025AF1E /* NetworkRequest.swift in Sources */,
 				C9A8C26B22EF86B400CC79A2 /* AppDelegate.swift in Sources */,
 				C9A8C28C22EFA00600CC79A2 /* CharactersViewController.swift in Sources */,
 				C9EC10E522F1D42D00DF3EDD /* Constants.swift in Sources */,
+				C97BCE8A22F25C97002C2F63 /* CellSetup.swift in Sources */,
 				C9EC10E222F1CC5300DF3EDD /* Extensions.swift in Sources */,
 				C9A8C29022EFA44500CC79A2 /* DetailsViewController.swift in Sources */,
 				C968C98522F0E2CE0025AF1E /* UserInterfaceProtocol.swift in Sources */,
