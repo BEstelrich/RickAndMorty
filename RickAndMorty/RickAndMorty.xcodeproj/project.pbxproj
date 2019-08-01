@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C94A0CFD22F3427A00236E50 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94A0CFC22F3427A00236E50 /* AlertManager.swift */; };
 		C968C97F22F0DB4B0025AF1E /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C968C97E22F0DB4B0025AF1E /* NetworkRequest.swift */; };
 		C968C98122F0DB650025AF1E /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = C968C98022F0DB650025AF1E /* Character.swift */; };
 		C968C98322F0DBC40025AF1E /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = C968C98222F0DBC40025AF1E /* Data.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C94A0CFC22F3427A00236E50 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		C968C97E22F0DB4B0025AF1E /* NetworkRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
 		C968C98022F0DB650025AF1E /* Character.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		C968C98222F0DBC40025AF1E /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
@@ -69,6 +71,15 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		C94A0CFB22F3425600236E50 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				C9EC10E122F1CC5300DF3EDD /* Extensions.swift */,
+				C94A0CFC22F3427A00236E50 /* AlertManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		C9A8C25E22EF86B400CC79A2 = {
 			isa = PBXGroup;
 			children = (
@@ -91,6 +102,7 @@
 				C9A8C27F22EF875400CC79A2 /* SupportingFiles */,
 				C9A8C28022EF877100CC79A2 /* UserInterface */,
 				C9A8C28422EF87BA00CC79A2 /* Storage */,
+				C94A0CFB22F3425600236E50 /* Managers */,
 				C9A8C28622EF880300CC79A2 /* Services */,
 			);
 			path = RickAndMorty;
@@ -159,7 +171,6 @@
 			isa = PBXGroup;
 			children = (
 				C968C97E22F0DB4B0025AF1E /* NetworkRequest.swift */,
-				C9EC10E122F1CC5300DF3EDD /* Extensions.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -245,6 +256,7 @@
 			files = (
 				C968C98122F0DB650025AF1E /* Character.swift in Sources */,
 				C9EC10E722F1DDD500DF3EDD /* Episode.swift in Sources */,
+				C94A0CFD22F3427A00236E50 /* AlertManager.swift in Sources */,
 				C968C98322F0DBC40025AF1E /* Data.swift in Sources */,
 				C97BCE8822F25B46002C2F63 /* KillButton.swift in Sources */,
 				C9A8C28A22EF907700CC79A2 /* EpisodesCollectionViewCell.swift in Sources */,

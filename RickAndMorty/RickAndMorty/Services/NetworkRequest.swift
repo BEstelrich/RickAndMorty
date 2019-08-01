@@ -11,7 +11,6 @@ import UIKit
 class NetworkRequest {
     private let requestAPIData = RequestAPIData()
     
-    
     /// Handles all API requests.
     func fetchingAPIs()  {
         requestAPIData.fetchEpisodes()
@@ -20,47 +19,57 @@ class NetworkRequest {
 }
 
 class RequestAPIData {
+    private let alertManager = AlertManager()
     
     /// Fetch Episodes from the API.
     /// This method fetchs data straight to model if model classes are conformed to Codable protocol.
     func fetchEpisodes() {
-        let url = URL(string: (Constants.API.episodesURL))
+        guard let url = URL(string: Constants.API.episodesURL) else { return }
         
-        URLSession.shared.dataTask(with: url!) { (data, response, error) in
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
             do {
                 if error == nil {
                     Data.episodesArray = try JSONDecoder().decode([Episode].self, from: data!)
                     DispatchQueue.main.async {
                         NotificationCenter.default.post(name: NSNotification.Name(rawValue: Constants.Observers.reloadEpisodesCollectionView), object: nil)
                     }
-
                 } else {
-                    print("There is an error: \(error.debugDescription)")
+                    print("Error parsing Episodes JSON: \(error.debugDescription)")
+                    DispatchQueue.main.async {
+                        self.alertManager.showEpisodesErrorAlert()
+                    }
                 }
-                
             } catch {
-                print("Error parsing JSON: \(error.localizedDescription)")
+                print("Error parsing Episodes JSON: \(error.localizedDescription)")
+                DispatchQueue.main.async {
+                    self.alertManager.showEpisodesErrorAlert()
+                }
             }
-            
         }.resume()
     }
     
     /// Fetch Characters from the API.
     /// This method fetchs data straight to model if model classes are conformed to Codable protocol.
     func fetchCharacters() {
-        let url = URL(string: Constants.API.charactersURL)
+        guard let url = URL(string: Constants.API.charactersURL) else { return }
         
-        URLSession.shared.dataTask(with: url!) { (data, response, error) in
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
             do {
                 if error == nil {
                     Data.charactersArray = try JSONDecoder().decode([Character].self, from: data!)
                 } else {
-                    print("There is an error: \(error.debugDescription)")
+                    print("Error parsing Characters JSON: \(error.debugDescription)")
+                    DispatchQueue.main.async {
+                        self.alertManager.showCharactersErrorAlert()
+                    }
                 }
             } catch {
-                print("Error parsing JSON: \(error.localizedDescription)")
+                print("Error parsing Characters JSON: \(error.localizedDescription)")
+                DispatchQueue.main.async {
+                    self.alertManager.showCharactersErrorAlert()
+                }
             }
-            
-            }.resume()
+        }.resume()
     }
+    
 }
