@@ -13,7 +13,7 @@ class EpisodesViewController: UIViewController  {
     // MARK: - IBOutlets
     @IBOutlet weak var episodesCollectionView: UICollectionView!
     
-    
+
     // MARK: - ViewController lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,8 +25,11 @@ class EpisodesViewController: UIViewController  {
     
     // MARK: - Local functions
     private func fetchData() {
-        let networkRequest = NetworkRequest()
-        networkRequest.fetchingAPIs()
+        let episodesAPI = NetworkRequest(apiData: FetchAPIEpisodes())
+        let charactersAPI = NetworkRequest(apiData: FetchAPICharacters())
+        
+        episodesAPI.fetchDataFromAPI()
+        charactersAPI.fetchDataFromAPI()
     }
     
     private func setupObservers() {

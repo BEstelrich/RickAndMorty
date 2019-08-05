@@ -8,24 +8,33 @@
 
 import UIKit
 
+protocol APIData {
+    func fetchData()
+}
+
 class NetworkRequest {
-    private let requestAPIData = RequestAPIData()
+    private let apiData: APIData
     
-    /// Handles all API requests.
-    func fetchingAPIs()  {
-        requestAPIData.fetchEpisodes()
-        requestAPIData.fetchCharacters()
+    init(apiData: APIData) {
+        self.apiData = apiData
+    }
+    
+    /// Handles API requests.
+    func fetchDataFromAPI() {
+        apiData.fetchData()
     }
 }
 
-class RequestAPIData {
+class FetchAPIEpisodes: APIData {
     private let alertManager = AlertManager()
+    
+    private var url: URL {
+        return URL(string: Constants.API.episodesURL)!
+    }
     
     /// Fetch Episodes from the API.
     /// This method fetchs data straight to model if model classes are conformed to Codable protocol.
-    func fetchEpisodes() {
-        guard let url = URL(string: Constants.API.episodesURL) else { return }
-        
+    func fetchData() {
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             do {
                 if error == nil {
@@ -47,12 +56,18 @@ class RequestAPIData {
             }
         }.resume()
     }
+}
+
+class FetchAPICharacters: APIData {
+    private let alertManager = AlertManager()
     
-    /// Fetch Characters from the API.
+    private var url: URL {
+        return URL(string: Constants.API.charactersURL)!
+    }
+    
+    /// Fetch Episodes from the API.
     /// This method fetchs data straight to model if model classes are conformed to Codable protocol.
-    func fetchCharacters() {
-        guard let url = URL(string: Constants.API.charactersURL) else { return }
-        
+    func fetchData() {
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             do {
                 if error == nil {
@@ -71,5 +86,4 @@ class RequestAPIData {
             }
         }.resume()
     }
-    
 }
