@@ -40,10 +40,12 @@ class CharactersViewController: UIViewController {
     private func extractCharactersFromEpisodes(_ episodeCharacters: [String]) {
         characterIDs.removeAll()
         for character in episodeCharacters {
-            let initialIndex = character.lastIndex(of: "/") ?? character.index(character.startIndex, offsetBy: 42)
-            let extractedIDString = character[initialIndex...]
-            let integerConversion = Int(extractedIDString)
-            characterIDs.append(integerConversion!)
+            if let index = character.lastIndex(of: "/") {
+                let range = character.index(after: index)..<character.endIndex
+                let extractedIDString = character[range]
+                let integerConversion = Int(extractedIDString)
+                characterIDs.append(integerConversion!)
+            }
         }
     }
     
