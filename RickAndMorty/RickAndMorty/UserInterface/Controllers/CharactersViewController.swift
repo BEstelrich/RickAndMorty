@@ -40,9 +40,9 @@ class CharactersViewController: UIViewController {
     private func extractCharactersFromEpisodes(_ episodeCharacters: [String]) {
         characterIDs.removeAll()
         for character in episodeCharacters {
-            let initialIndex = character.index(character.startIndex, offsetBy: 42)
-            let extractedString = character[initialIndex...]
-            let integerConversion = Int(extractedString)
+            let initialIndex = character.lastIndex(of: "/") ?? character.index(character.startIndex, offsetBy: 42)
+            let extractedIDString = character[initialIndex...]
+            let integerConversion = Int(extractedIDString)
             characterIDs.append(integerConversion!)
         }
     }
@@ -80,12 +80,10 @@ extension CharactersViewController: UICollectionViewDataSource, UICollectionView
         charactersCollectionView.dataSource = self
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return Data.currentEpisodeCharacters.count
     }
 
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = charactersCollectionView.dequeueReusableCell(withReuseIdentifier: Constants.Cells.characterCell, for: indexPath) as! CharactersCollectionViewCell
         cell.characterNameLabel.text = Data.currentEpisodeCharacters[indexPath.row].name

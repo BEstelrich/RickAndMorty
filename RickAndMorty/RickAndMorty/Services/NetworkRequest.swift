@@ -28,13 +28,11 @@ class NetworkRequest {
 class FetchAPIEpisodes: APIData {
     private let alertManager = AlertManager()
     
-    private var url: URL {
-        return URL(string: Constants.API.episodesURL)!
-    }
-    
     /// Fetch Episodes from the API.
     /// This method fetchs data straight to model if model classes are conformed to Codable protocol.
     func fetchData() {
+        guard let url = URL(string: Constants.API.episodesURL) else { return }
+        
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             do {
                 if error == nil {
@@ -61,13 +59,11 @@ class FetchAPIEpisodes: APIData {
 class FetchAPICharacters: APIData {
     private let alertManager = AlertManager()
     
-    private var url: URL {
-        return URL(string: Constants.API.charactersURL)!
-    }
-    
     /// Fetch Episodes from the API.
     /// This method fetchs data straight to model if model classes are conformed to Codable protocol.
     func fetchData() {
+        guard let url = URL(string: Constants.API.charactersURL) else { return }
+         
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             do {
                 if error == nil {
