@@ -13,23 +13,37 @@ class EpisodesViewController: UIViewController  {
     // MARK: - IBOutlets
     @IBOutlet weak var episodesCollectionView: UICollectionView!
     
-
+    var episodes: [Episode] = [] { didSet { DispatchQueue.main.async { self.episodesCollectionView.reloadData() } } }
+    var isLoading: Bool            = false
+    var episodesCurrentPage: Int   = 1
+    var episodesTotalPages: Int!
+    
+    
     // MARK: - ViewController lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupEpisodesCollectionView()
         setupObservers()
-        fetchData()
+        fetchEpisodes(for: episodesCurrentPage)
     }
     
     
     // MARK: - Local functions
-    private func fetchData() {
-        let episodesAPI = NetworkManager(apiData: FetchAPIEpisodes())
-        let charactersAPI = NetworkManager(apiData: FetchAPICharacters())
+    private func fetchEpisodes(for page: Int) {
+        isLoading = true
         
-        episodesAPI.fetchDataFromAPI()
-        charactersAPI.fetchDataFromAPI()
+        NetworkManager2.shared.getEpisodes(for: page) { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let episodesData):
+                self.episodesTotalPages = episodesData.info.pages
+                episodesData.results.forEach { self.episodes.append($0) }
+            case .failure(let error):
+                print(error)
+            }
+            self.isLoading = false
+        }
     }
     
     private func setupObservers() {
@@ -63,21 +77,40 @@ extension EpisodesViewController: UICollectionViewDataSource, UICollectionViewDe
         episodesCollectionView.dataSource = self
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Data.episodesArray.count
+        return episodes.count
     }
 
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = episodesCollectionView.dequeueReusableCell(withReuseIdentifier: Constants.Cells.episodeCell, for: indexPath) as! EpisodesCollectionViewCell
-        cell.episodeNumberLabel.text = Data.episodesArray[indexPath.row].episode
-        cell.episodeTitleLabel.text  = Data.episodesArray[indexPath.row].name
-        cell.episodeDateLabel.text   = Data.episodesArray[indexPath.row].airDate
+        cell.episodeNumberLabel.text = episodes[indexPath.row].episode
+        cell.episodeTitleLabel.text  = episodes[indexPath.row].name
+        cell.episodeDateLabel.text   = episodes[indexPath.row].airDate
         return cell
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let saveAreaWidth = view.safeAreaLayoutGuide.layoutFrame.size.width
         let cellSetup = UserInterfaceHelper.setCell(width: saveAreaWidth, height: Constants.Design.cellHeight, padding: Constants.Design.cellPadding)
         return cellSetup
     }
+    
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let offsetY       = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let height        = scrollView.frame.size.height
+        
+        if offsetY > contentHeight - height {
+            guard !isLoading,
+            episodesCurrentPage < episodesTotalPages else { return }
+
+            episodesCurrentPage += 1
+            fetchEpisodes(for: episodesCurrentPage)
+        }
+    }
+
 }

@@ -63,7 +63,7 @@ class FetchAPICharacters: APIData {
     /// This method fetchs data straight to model if model classes are conformed to Codable protocol.
     func fetchData() {
         guard let url = URL(string: Constants.API.charactersURL) else { return }
-         
+        
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             do {
                 if error == nil {
@@ -82,4 +82,84 @@ class FetchAPICharacters: APIData {
             }
         }.resume()
     }
+}
+
+
+class NetworkManager2 {
+    
+    static let shared   = NetworkManager2()
+    private let baseURL = "https://rickandmortyapi.com/api/"
+    let cache           = NSCache<NSString, UIImage>()
+    
+    
+    private init() {}
+    
+    
+    func getEpisodes(for page: Int, completed: @escaping (Result<EpisodesData, AppError>) -> Void) {
+        let endPointURL = baseURL + "episode/?page=\(page)"
+        
+        guard let url = URL(string: endPointURL) else {
+            completed(.failure(.invalidURL))
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard error == nil else {
+                completed(.failure(.unableToComplete))
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                completed(.failure(.unableToComplete))
+                return
+            }
+            
+            guard let data = data else {
+                completed(.failure(.invalidData))
+                return
+            }
+            
+            do {
+                let decoder      = JSONDecoder()
+                let episodesData = try decoder.decode(EpisodesData.self, from: data)
+                completed(.success(episodesData))
+            } catch {
+                completed(.failure(.invalidData))
+            }
+        }
+        task.resume()
+    }
+    
+    
+    func downloadImage(from urlString: String, completed: @escaping (UIImage?) -> Void) {
+        let cacheKey = NSString(string: urlString)
+        
+        if let image = cache.object(forKey: cacheKey) {
+            completed(image)
+            return
+        }
+        
+        guard let url = URL(string: urlString) else {
+            completed(nil)
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+            guard let self = self,
+                error == nil,
+                let response = response as? HTTPURLResponse,
+                response.statusCode == 200,
+                let data = data,
+                let image = UIImage(data: data) else {
+                    completed(nil)
+                    return
+            }
+            
+            self.cache.setObject(image, forKey: cacheKey)
+            completed(image)
+        }
+        
+        task.resume()
+    }
+    
 }

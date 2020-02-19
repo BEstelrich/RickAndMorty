@@ -8,6 +8,23 @@
 
 import Foundation
 
+
+struct EpisodesData: Codable {
+    
+    let info: Info
+    let results: [Episode]
+    
+}
+
+
+struct Info: Codable {
+    
+    let count: Int
+    let pages: Int
+    
+}
+
+
 struct Episode: Codable {
     
     let id: Int
