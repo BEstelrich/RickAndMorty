@@ -25,8 +25,8 @@ class EpisodesViewController: UIViewController  {
     
     // MARK: - Local functions
     private func fetchData() {
-        let episodesAPI = NetworkRequest(apiData: FetchAPIEpisodes())
-        let charactersAPI = NetworkRequest(apiData: FetchAPICharacters())
+        let episodesAPI = NetworkManager(apiData: FetchAPIEpisodes())
+        let charactersAPI = NetworkManager(apiData: FetchAPICharacters())
         
         episodesAPI.fetchDataFromAPI()
         charactersAPI.fetchDataFromAPI()
@@ -43,17 +43,10 @@ class EpisodesViewController: UIViewController  {
     
     // MARK: - Segues
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let identifier = segue.identifier {
-            switch identifier {
-            case Constants.Segues.episodeCharactersSegue:
-                if let charactersViewController = segue.destination as? CharactersViewController {
-                    if let indexPath = self.episodesCollectionView.indexPathsForSelectedItems?.last {
-                        charactersViewController.episodeCharacters = Data.episodesArray[indexPath.row].characters
-                        charactersViewController.episodeTitle = Data.episodesArray[indexPath.row].episode
-                    }
-                }
-            default:
-                break
+        if let charactersViewController = segue.destination as? CharactersViewController {
+            if let indexPath = self.episodesCollectionView.indexPathsForSelectedItems?.last {
+                charactersViewController.episodeCharacters = Data.episodesArray[indexPath.row].characters
+                charactersViewController.episodeTitle = Data.episodesArray[indexPath.row].episode
             }
         }
     }
@@ -77,14 +70,14 @@ extension EpisodesViewController: UICollectionViewDataSource, UICollectionViewDe
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = episodesCollectionView.dequeueReusableCell(withReuseIdentifier: Constants.Cells.episodeCell, for: indexPath) as! EpisodesCollectionViewCell
         cell.episodeNumberLabel.text = Data.episodesArray[indexPath.row].episode
-        cell.episodeTitleLabel.text = Data.episodesArray[indexPath.row].name
-        cell.episodeDateLabel.text = Data.episodesArray[indexPath.row].airDate
+        cell.episodeTitleLabel.text  = Data.episodesArray[indexPath.row].name
+        cell.episodeDateLabel.text   = Data.episodesArray[indexPath.row].airDate
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let saveAreaWidth = view.safeAreaLayoutGuide.layoutFrame.size.width
-        let cellSetup = CellSetup().setCell(width: saveAreaWidth, height: Constants.Design.cellHeight, padding: Constants.Design.cellPadding)
+        let cellSetup = UserInterfaceHelper.setCell(width: saveAreaWidth, height: Constants.Design.cellHeight, padding: Constants.Design.cellPadding)
         return cellSetup
     }
 }

@@ -9,6 +9,7 @@
 import Foundation
 
 struct Character: Codable {
+    
     let id: Int
     let name: String
     var status: Status
@@ -22,38 +23,43 @@ struct Character: Codable {
     let url: String
     let created: String
     
+    
     enum Status: String, Codable {
-        case alive = "Alive"
-        case dead = "Dead"
+        case alive   = "Alive"
+        case dead    = "Dead"
         case unknown = "unknown"
     }
+    
     
     enum Species: String, Codable {
-        case alien = "Alien"
-        case animal = "Animal"
-        case cronenberg = "Cronenberg"
-        case disease = "Disease"
-        case human = "Human"
-        case humanoid = "Humanoid"
-        case mytholog = "Mytholog"
-        case parasite = "Parasite"
-        case poopybutthole = "Poopybutthole"
-        case robot = "Robot"
-        case unknown = "unknown"
-        case vampire = "Vampire"
+        case alien         = "Alien"
+        case animal        = "Animal"
+        case cronenberg    = "Cronenberg"
+        case disease       = "Disease"
+        case human         = "Human"
+        case humanoid      = "Humanoid"
+        case mytholog      = "Mytholog"
+        case parasite      = "Parasite"
+        case poopyButThole = "Poopybutthole"
+        case robot         = "Robot"
+        case unknown       = "unknown"
+        case vampire       = "Vampire"
     }
     
+    
     enum Gender: String, Codable {
-        case female = "Female"
+        case female     = "Female"
         case genderless = "Genderless"
-        case male = "Male"
-        case unknown = "unknown"
+        case male       = "Male"
+        case unknown    = "unknown"
     }
+    
     
     struct Location: Codable {
         let name: String
         let url: String
     }
+    
 }
 
 

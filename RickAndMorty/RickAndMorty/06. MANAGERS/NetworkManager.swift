@@ -1,5 +1,5 @@
 //
-//  NetworkRequest.swift
+//  NetworkManager.swift
 //  RickAndMorty
 //
 //  Created by BES on 2019-07-30.
@@ -12,7 +12,7 @@ protocol APIData {
     func fetchData()
 }
 
-class NetworkRequest {
+class NetworkManager {
     private let apiData: APIData
     
     init(apiData: APIData) {

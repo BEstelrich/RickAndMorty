@@ -11,7 +11,6 @@ import UIKit
 extension UIImageView {
 
     /// Fetch image asynchronously from API.
-    ///
     /// - Parameter string: that's the link from the API.
     public func fetchImageFromString(_ string: String) {
         self.image = nil
