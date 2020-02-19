@@ -6,12 +6,12 @@
 //  Copyright © 2019 BEstelrich. All rights reserved.
 //
 
-import Foundation
-
-class Data {
-    
-    public static var episodesArray = [Episode]()
-    public static var charactersArray = [Character]()
-    public static var currentEpisodeCharacters = [Character]()
-    
-}
+//import Foundation
+//
+//class Data {
+//    
+//    public static var episodesArray = [Episode]()
+//    public static var charactersArray = [Character]()
+//    public static var currentEpisodeCharacters = [Character]()
+//    
+//}

@@ -9,7 +9,9 @@
 import UIKit
 
 class CharactersCollectionViewCell: UICollectionViewCell {
+    
     @IBOutlet weak var characterNameLabel: UILabel!
-    @IBOutlet weak var characterImage: UIImageView!
+    @IBOutlet weak var characterImage: CharacterImageView!
     @IBOutlet weak var characterStatusImage: UIImageView!
+    
 }

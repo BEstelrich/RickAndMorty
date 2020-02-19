@@ -14,6 +14,10 @@ class EpisodesViewController: UIViewController  {
     @IBOutlet weak var episodesCollectionView: UICollectionView!
     
     var episodes: [Episode] = [] { didSet { DispatchQueue.main.async { self.episodesCollectionView.reloadData() } } }
+    var characters: [Character] = []
+    
+    var charactersCount: Int = 0
+    
     var isLoading: Bool            = false
     var episodesCurrentPage: Int   = 1
     var episodesTotalPages: Int!
@@ -23,8 +27,16 @@ class EpisodesViewController: UIViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupEpisodesCollectionView()
-        setupObservers()
+        getCharacterCount()
         fetchEpisodes(for: episodesCurrentPage)
+    }
+    
+    @IBAction func unwindToEpisodes(segue: UIStoryboardSegue) {
+//        if let sourceViewController = segue.source as? CharactersViewController {
+//            let sourceCharacter = sourceViewController.
+//            characters.filter { $0.id == sourceCharacter!.id }.first?.status = sourceCharacter!.status
+//            DispatchQueue.main.async { self.charactersCollectionView.reloadData() }
+//        }
     }
     
     
@@ -32,13 +44,14 @@ class EpisodesViewController: UIViewController  {
     private func fetchEpisodes(for page: Int) {
         isLoading = true
         
-        NetworkManager2.shared.getEpisodes(for: page) { [weak self] result in
+        NetworkManager.shared.getEpisodes(for: page) { [weak self] result in
             guard let self = self else { return }
             
             switch result {
             case .success(let episodesData):
                 self.episodesTotalPages = episodesData.info.pages
                 episodesData.results.forEach { self.episodes.append($0) }
+                
             case .failure(let error):
                 print(error)
             }
@@ -46,21 +59,63 @@ class EpisodesViewController: UIViewController  {
         }
     }
     
-    private func setupObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(EpisodesViewController.reloadInterface), name:NSNotification.Name(rawValue: Constants.Observers.reloadEpisodesCollectionView), object: nil)
+    
+    private func getCharacterCount() {
+        NetworkManager.shared.getCharactersCount { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let charactersData):
+                self.charactersCount = charactersData.info.count
+                print(self.charactersCount)
+                self.fetchAllCharacters()
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
-    @objc private func reloadInterface() {
-        episodesCollectionView.reloadData()
+    
+    private func fetchAllCharacters() {
+        var charactersNumbers: String = "1"
+        
+        for number in 2...charactersCount {
+            charactersNumbers += ",\(number)"
+        }
+
+        NetworkManager.shared.getCharacters(from: charactersNumbers) { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let characters):
+                self.characters = characters
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    
+    private func filterCharacters(by episodeIndex: Int) -> [Character] {
+        let selectedEpisode = episodes.filter { $0.id == episodeIndex }.first
+        let charactersIDs   = selectedEpisode?.characters
+        
+//        let ids = charactersIDs?.inde
+        
+        return [Character]()
     }
     
     
     // MARK: - Segues
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let charactersViewController = segue.destination as? CharactersViewController {
-            if let indexPath = self.episodesCollectionView.indexPathsForSelectedItems?.last {
-                charactersViewController.episodeCharacters = Data.episodesArray[indexPath.row].characters
-                charactersViewController.episodeTitle = Data.episodesArray[indexPath.row].episode
+            if let cell = sender as? EpisodesCollectionViewCell,
+              let indexPath = self.episodesCollectionView.indexPath(for: cell) {
+                print(episodes[indexPath.row])
+//                charactersViewController.characters           = episodes[indexPath.row].characters
+                charactersViewController.navigationItem.title = episodes[indexPath.row].episode
             }
         }
     }
@@ -70,7 +125,7 @@ class EpisodesViewController: UIViewController  {
 
 // MARK: - Extensions
 // UIViewController conforming protocols functions.
-extension EpisodesViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension EpisodesViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     private func setupEpisodesCollectionView() {
         episodesCollectionView.delegate = self

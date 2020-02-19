@@ -8,86 +8,9 @@
 
 import UIKit
 
-protocol APIData {
-    func fetchData()
-}
-
 class NetworkManager {
-    private let apiData: APIData
     
-    init(apiData: APIData) {
-        self.apiData = apiData
-    }
-    
-    /// Handles API requests.
-    func fetchDataFromAPI() {
-        apiData.fetchData()
-    }
-}
-
-class FetchAPIEpisodes: APIData {
-    private let alertManager = AlertManager()
-    
-    /// Fetch Episodes from the API.
-    /// This method fetchs data straight to model if model classes are conformed to Codable protocol.
-    func fetchData() {
-        guard let url = URL(string: Constants.API.episodesURL) else { return }
-        
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            do {
-                if error == nil {
-                    Data.episodesArray = try JSONDecoder().decode([Episode].self, from: data!)
-                    DispatchQueue.main.async {
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: Constants.Observers.reloadEpisodesCollectionView), object: nil)
-                    }
-                } else {
-                    print("Error parsing Episodes JSON: \(error.debugDescription)")
-                    DispatchQueue.main.async {
-                        self.alertManager.showEpisodesErrorAlert()
-                    }
-                }
-            } catch {
-                print("Error parsing Episodes JSON: \(error.localizedDescription)")
-                DispatchQueue.main.async {
-                    self.alertManager.showEpisodesErrorAlert()
-                }
-            }
-        }.resume()
-    }
-}
-
-class FetchAPICharacters: APIData {
-    private let alertManager = AlertManager()
-    
-    /// Fetch Episodes from the API.
-    /// This method fetchs data straight to model if model classes are conformed to Codable protocol.
-    func fetchData() {
-        guard let url = URL(string: Constants.API.charactersURL) else { return }
-        
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            do {
-                if error == nil {
-                    Data.charactersArray = try JSONDecoder().decode([Character].self, from: data!)
-                } else {
-                    print("Error parsing Characters JSON: \(error.debugDescription)")
-                    DispatchQueue.main.async {
-                        self.alertManager.showCharactersErrorAlert()
-                    }
-                }
-            } catch {
-                print("Error parsing Characters JSON: \(error.localizedDescription)")
-                DispatchQueue.main.async {
-                    self.alertManager.showCharactersErrorAlert()
-                }
-            }
-        }.resume()
-    }
-}
-
-
-class NetworkManager2 {
-    
-    static let shared   = NetworkManager2()
+    static let shared   = NetworkManager()
     private let baseURL = "https://rickandmortyapi.com/api/"
     let cache           = NSCache<NSString, UIImage>()
     
@@ -122,6 +45,79 @@ class NetworkManager2 {
             do {
                 let decoder      = JSONDecoder()
                 let episodesData = try decoder.decode(EpisodesData.self, from: data)
+                completed(.success(episodesData))
+            } catch {
+                completed(.failure(.invalidData))
+            }
+        }
+        task.resume()
+    }
+    
+    
+    func getCharactersCount(completed: @escaping (Result<CharactersData, AppError>) -> Void) {
+        let endPointURL = baseURL + "character/"
+        
+        guard let url = URL(string: endPointURL) else {
+            completed(.failure(.invalidURL))
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard error == nil else {
+                completed(.failure(.unableToComplete))
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                completed(.failure(.unableToComplete))
+                return
+            }
+            
+            guard let data = data else {
+                completed(.failure(.invalidData))
+                return
+            }
+            
+            do {
+                let decoder        = JSONDecoder()
+                let charactersData = try decoder.decode(CharactersData.self, from: data)
+                completed(.success(charactersData))
+            } catch {
+                completed(.failure(.invalidData))
+            }
+        }
+        task.resume()
+    }
+    
+    
+    
+    func getCharacters(from id: String, completed: @escaping (Result<[Character], AppError>) -> Void) {
+        let endPointURL = baseURL + "character/\(id)"
+        
+        guard let url = URL(string: endPointURL) else {
+            completed(.failure(.invalidURL))
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard error == nil else {
+                completed(.failure(.unableToComplete))
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                completed(.failure(.unableToComplete))
+                return
+            }
+            
+            guard let data = data else {
+                completed(.failure(.invalidData))
+                return
+            }
+            
+            do {
+                let decoder      = JSONDecoder()
+                let episodesData = try decoder.decode([Character].self, from: data)
                 completed(.success(episodesData))
             } catch {
                 completed(.failure(.invalidData))

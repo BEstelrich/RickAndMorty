@@ -18,7 +18,7 @@ class Constants {
     
     /// This class recopilates cell identifiers and other related parameters.
     public class Cells {
-        public static let episodeCell = "EpisodesCell"
+        public static let episodeCell   = "EpisodesCell"
         public static let characterCell = "CharactersCell"
     }
     
@@ -34,33 +34,6 @@ class Constants {
     public class Segues {
         public static let episodeCharactersSegue = "EpisodeCharactersSegue"
         public static let characterDetailsSegue  = "CharacterDetailsSegue"
-    }
-    
-    /// Observers namings are collected in this class.
-    public class Observers {
-        public static let reloadEpisodesCollectionView = "ReloadEpisodesCollectionView"
-    }
-    
-    /// API strings are gathered here.
-    public class API {
-        public static var charactersURL: String {
-            var charactersNumbers = String()
-            
-            for number in 1...492 {
-                charactersNumbers += "\(number),"
-            }
-            return "https://rickandmortyapi.com/api/character/\(charactersNumbers)" + "493"
-        }
-        
-        public static var episodesURL: String {
-            var episodesNumbers = String()
-
-            for number in 1...30 {
-                episodesNumbers += "\(number),"
-            }
-            return "https://rickandmortyapi.com/api/episode/\(episodesNumbers)" + "31"
-        }
-        
     }
     
 }

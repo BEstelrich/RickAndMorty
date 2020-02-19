@@ -11,8 +11,7 @@ import UIKit
 class DetailsViewController: UIViewController {
     
     // MARK: - IBOutlets
-    @IBOutlet weak var navigationBarTitle: UINavigationItem!
-    @IBOutlet weak var characterAvatarImage: UIImageView!
+    @IBOutlet weak var characterAvatarImage: CharacterImageView!
     @IBOutlet weak var characterNameLabel: UILabel!
     @IBOutlet weak var characterStatusLabel: UILabel!
     @IBOutlet weak var characterSpeciesLabel: UILabel!
@@ -23,52 +22,55 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var characterStatusImage: UIImageView!
     @IBOutlet weak var changeCharacterStatusButton: KillButton!
     
-    
-    // MARK: - Variables
-    var currentCharacter: Character?
+    var character: Character?
+    var test = 1
     
     
     // MARK: - ViewController lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        reloadData()
+        populateData()
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        performSegue(withIdentifier: "UnwindToCharactersWithSegue", sender: nil)
     }
     
     
     // MARK: - Local functions
-    private func reloadData() {
-        characterAvatarImage.fetchImageFromString(currentCharacter?.image ?? "Placeholder.png")
-        navigationBarTitle.title = (currentCharacter?.name == "") ? "N/A" : currentCharacter?.name
-        characterNameLabel.text = (currentCharacter?.name == "") ? "N/A" : currentCharacter?.name
-        characterStatusLabel.text = "\(currentCharacter?.status.rawValue ?? "N/A")"
-        characterSpeciesLabel.text = "\(currentCharacter?.species.rawValue ?? "N/A")"
-        characterTypeLabel.text = (currentCharacter?.type == "") ? "N/A" : currentCharacter?.type
-        characterGenderLabel.text = "\(currentCharacter?.gender.rawValue ?? "N/A")"
-        characterOriginLabel.text = (currentCharacter?.origin.name == "") ? "N/A" : currentCharacter?.origin.name
-        characterLocationLabel.text = (currentCharacter?.location.name == "") ? "N/A" : currentCharacter?.location.name
-        characterStatusImage.image = (currentCharacter!.status.rawValue == "Alive") ? Constants.Images.aliveStatusImage : (currentCharacter!.status.rawValue == "Dead") ? Constants.Images.deadStatusImage : Constants.Images.unknownStatusImage
-        currentCharacter?.status.rawValue == "Alive" ? changeCharacterStatusButton.killState() : changeCharacterStatusButton.resuscitateState()
+    private func populateData() {
+        characterAvatarImage.downloadImage(fromURL: character?.image ?? "Placeholder.png")
+        characterNameLabel.text = (character?.name == "") ? "N/A" : character?.name
+        characterStatusLabel.text = "\(character?.status.rawValue ?? "N/A")"
+        characterSpeciesLabel.text = "\(character?.species.rawValue ?? "N/A")"
+        characterTypeLabel.text = (character?.type == "") ? "N/A" : character?.type
+        characterGenderLabel.text = "\(character?.gender.rawValue ?? "N/A")"
+        characterOriginLabel.text = (character?.origin.name == "") ? "N/A" : character?.origin.name
+        characterLocationLabel.text = (character?.location.name == "") ? "N/A" : character?.location.name
+        characterStatusImage.image = (character!.status.rawValue == "Alive") ? Constants.Images.aliveStatusImage : (character!.status.rawValue == "Dead") ? Constants.Images.deadStatusImage : Constants.Images.unknownStatusImage
+        character?.status.rawValue == "Alive" ? changeCharacterStatusButton.killState() : changeCharacterStatusButton.resuscitateState()
     }
     
     
     // MARK: - IBActions
     @IBAction func tapToKill(_ sender: KillButton) {
 
-        let index = Data.currentEpisodeCharacters.firstIndex { (character) -> Bool in
-            character.id == self.currentCharacter?.id
-        }
-        
-        if currentCharacter?.status.rawValue == "Alive" {
+//        let index = Data.currentEpisodeCharacters.firstIndex { (character) -> Bool in
+//            character.id == self.character?.id
+//        }
+//
+        if character?.status.rawValue == "Alive" {
             sender.resuscitateState()
-            currentCharacter?.status = .dead
-            Data.currentEpisodeCharacters[index!].status = currentCharacter!.status
+            character?.status = .dead
             characterStatusImage.image = Constants.Images.deadStatusImage
-        } else if currentCharacter?.status.rawValue != "Alive" || currentCharacter?.status.rawValue == "unknown" {
+        } else if character?.status.rawValue != "Alive" || character?.status.rawValue == "unknown" {
             sender.killState()
-            currentCharacter?.status = .alive
-            Data.currentEpisodeCharacters[index!].status = currentCharacter!.status
+            character?.status = .alive
             characterStatusImage.image = Constants.Images.aliveStatusImage
         }
+        
         
     }
 

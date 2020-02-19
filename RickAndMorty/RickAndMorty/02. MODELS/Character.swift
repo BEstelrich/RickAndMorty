@@ -8,7 +8,21 @@
 
 import Foundation
 
-struct Character: Codable {
+class CharactersData: Codable {
+    
+    let info: CharactersInfo
+    let results: [Character]
+    
+}
+
+
+class CharactersInfo: Codable {
+    
+    let count: Int
+    
+}
+
+class Character: Codable {
     
     let id: Int
     let name: String

@@ -102,7 +102,7 @@
                                             <outlet property="episodeDateLabel" destination="K1m-3T-0uv" id="S7g-FR-rQz"/>
                                             <outlet property="episodeNumberLabel" destination="dKB-x2-KRP" id="lGh-ir-9bf"/>
                                             <outlet property="episodeTitleLabel" destination="crK-1m-Adi" id="sA5-Au-Dkr"/>
-                                            <segue destination="qcZ-Rn-TlF" kind="show" identifier="EpisodeCharactersSegue" id="nKN-nx-Fce"/>
+                                            <segue destination="qcZ-Rn-TlF" kind="show" identifier="EpisodeCharactersSegue" id="4vq-b0-ugQ"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -157,7 +157,7 @@
                                                     <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QH5-pY-raX">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QH5-pY-raX" customClass="CharacterImageView" customModule="RickAndMorty" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="125" height="125"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="QH5-pY-raX" secondAttribute="height" multiplier="1:1" id="bn5-1e-Bl4"/>
@@ -206,7 +206,6 @@
                     <navigationItem key="navigationItem" title="Episode Characters" id="S33-bW-ezF"/>
                     <connections>
                         <outlet property="charactersCollectionView" destination="f3Y-zn-bbo" id="Xht-VO-4wv"/>
-                        <outlet property="navigationBarTitle" destination="S33-bW-ezF" id="DfP-9M-j4S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="flj-hR-ubo" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -227,7 +226,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="tOB-h6-QxN">
                                         <rect key="frame" x="0.0" y="0.0" width="325" height="325"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="JNk-3f-gDT">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="JNk-3f-gDT" customClass="CharacterImageView" customModule="RickAndMorty" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="325" height="325"/>
                                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                 <constraints>
@@ -313,7 +312,7 @@
                                                             </label>
                                                         </subviews>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="75" id="ynB-KC-zvF"/>
+                                                            <constraint firstAttribute="width" priority="900" constant="75" id="ynB-KC-zvF"/>
                                                         </constraints>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="bottom" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="tK4-PK-JQ1" userLabel="Placeholders">
@@ -358,6 +357,9 @@
                                                         </subviews>
                                                     </stackView>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" priority="900" constant="325" id="mca-eY-Z7A"/>
+                                                </constraints>
                                             </stackView>
                                         </subviews>
                                     </stackView>
@@ -394,26 +396,12 @@
                             <constraint firstItem="AHn-S8-pKy" firstAttribute="top" secondItem="rDg-mZ-17w" secondAttribute="top" constant="50" id="090-tQ-AiN"/>
                             <constraint firstItem="JV9-Ix-IGj" firstAttribute="leading" secondItem="GLc-sX-lW0" secondAttribute="leading" id="4nW-cU-5jR"/>
                             <constraint firstItem="Hwz-WF-PkF" firstAttribute="top" secondItem="JNk-3f-gDT" secondAttribute="top" id="9ML-Wz-y66"/>
+                            <constraint firstItem="AHn-S8-pKy" firstAttribute="centerX" secondItem="GLc-sX-lW0" secondAttribute="centerX" id="ESa-Iv-AaS"/>
                             <constraint firstItem="Hwz-WF-PkF" firstAttribute="trailing" secondItem="JNk-3f-gDT" secondAttribute="trailing" id="LGu-La-rdS"/>
-                            <constraint firstItem="AHn-S8-pKy" firstAttribute="leading" secondItem="rDg-mZ-17w" secondAttribute="leading" constant="20" id="PDG-wi-4jo"/>
-                            <constraint firstItem="AHn-S8-pKy" firstAttribute="centerX" secondItem="GLc-sX-lW0" secondAttribute="centerX" id="PfY-Gb-U4r"/>
                             <constraint firstItem="JV9-Ix-IGj" firstAttribute="trailing" secondItem="GLc-sX-lW0" secondAttribute="trailing" id="SFm-Sy-NHr"/>
                             <constraint firstAttribute="bottom" secondItem="JV9-Ix-IGj" secondAttribute="bottom" id="r7X-k3-qkQ"/>
-                            <constraint firstItem="rDg-mZ-17w" firstAttribute="trailing" secondItem="AHn-S8-pKy" secondAttribute="trailing" constant="20" id="vte-gm-8NB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="rDg-mZ-17w"/>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="vte-gm-8NB"/>
-                                <exclude reference="PDG-wi-4jo"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=compact">
-                            <mask key="constraints">
-                                <include reference="vte-gm-8NB"/>
-                                <include reference="PDG-wi-4jo"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Character Details" id="FCz-gp-Ij8"/>
                     <connections>
@@ -427,10 +415,11 @@
                         <outlet property="characterStatusImage" destination="Hwz-WF-PkF" id="WS6-A3-tI9"/>
                         <outlet property="characterStatusLabel" destination="BXN-2H-HhD" id="GhP-tK-R6O"/>
                         <outlet property="characterTypeLabel" destination="lUs-ka-pYB" id="1zR-vJ-4ab"/>
-                        <outlet property="navigationBarTitle" destination="FCz-gp-Ij8" id="6P6-cO-GF2"/>
+                        <segue destination="dK0-XZ-y7G" kind="unwind" identifier="UnwindToCharactersWithSegue" unwindAction="unwindToCharactersWithSegue:" id="rDr-DI-LRo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ufr-Jf-bfp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="dK0-XZ-y7G" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3476.811594202899" y="-535.04464285714278"/>
         </scene>
