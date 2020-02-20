@@ -8,32 +8,42 @@
 
 import UIKit
 
-class Constants {
+enum Design {
+    static let cellPadding: CGFloat       = 10
+    static let cellHeight: CGFloat        = 50
+}
+
+
+enum Image {
+    static let placeholder                = UIImage(imageLiteralResourceName: "Placeholder.png")
+    static let aliveStatusImage           = UIImage(imageLiteralResourceName: "AliveStatusImage.png")
+    static let unknownStatusImage         = UIImage(imageLiteralResourceName: "UnknownStatusnImage.png")
+    static let deadStatusImage            = UIImage(imageLiteralResourceName: "DeadStatusImage.png")
+}
+
+
+enum Identifier {
     
-    /// Design class gathers any design parameter susceptible to be changed in the future.
-    public class Design {
-        public static let cellPadding: CGFloat = 10
-        public static let cellHeight: CGFloat  = 50
+    enum Segue {
+        static let episodeCharactersSegue = "EpisodeCharactersSegue"
+        static let characterDetailsSegue  = "CharacterDetailsSegue"
     }
     
-    /// This class recopilates cell identifiers and other related parameters.
-    public class Cells {
-        public static let episodeCell   = "EpisodesCell"
-        public static let characterCell = "CharactersCell"
+    
+    enum Cell {
+        static let episodeCell            = "EpisodesCell"
+        static let characterCell          = "CharactersCell"
     }
     
-    /// Images class is used to give access to the images path.
-    public class Images {
-        public static let placeholder        = UIImage(imageLiteralResourceName: "Placeholder.png")
-        public static let aliveStatusImage   = UIImage(imageLiteralResourceName: "AliveStatusImage.png")
-        public static let unknownStatusImage = UIImage(imageLiteralResourceName: "UnknownStatusnImage.png")
-        public static let deadStatusImage    = UIImage(imageLiteralResourceName: "DeadStatusImage.png")
-    }
+}
+
+
+enum CustomAlert {
+    static let showEpisodesErrorAlert     = Alert(title: "No episodes error",
+                                                  message: "There is no episodes to show. Please try again.",
+                                                  buttonTitle: "OK")
     
-    /// Segues identifiers are stored in this class.
-    public class Segues {
-        public static let episodeCharactersSegue = "EpisodeCharactersSegue"
-        public static let characterDetailsSegue  = "CharacterDetailsSegue"
-    }
-    
+    static let showCharactersErrorAlert   = Alert(title: "No characters error",
+                                                  message: "There is no characters to show. Please try again.",
+                                                  buttonTitle: "OK")
 }

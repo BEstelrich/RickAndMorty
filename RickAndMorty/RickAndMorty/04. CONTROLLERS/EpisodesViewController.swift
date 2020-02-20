@@ -8,66 +8,72 @@
 
 import UIKit
 
+// MARK: - 1. VIEWCONTROLLER
 class EpisodesViewController: UIViewController  {
     
-    // MARK: - IBOutlets
+    // MARK: - IBOutlets and properties.
     @IBOutlet weak var episodesCollectionView: UICollectionView!
     
-    var episodes: [Episode] = [] { didSet { DispatchQueue.main.async { self.episodesCollectionView.reloadData() } } }
-    var characters: [Character] = []
+    var episodes: [Episode]      = [] { didSet { DispatchQueue.main.async { self.episodesCollectionView.reloadData() } } }
+    var characters: [Character]  = []
     
-    var charactersCount: Int = 0
-    
-    var isLoading: Bool            = false
-    var episodesCurrentPage: Int   = 1
+    var isLoading: Bool          = false
+    var charactersCount: Int     = 0
+    var episodesCurrentPage: Int = 1
     var episodesTotalPages: Int!
     
     
-    // MARK: - ViewController lifecycle
+    // MARK: - ViewController lifecycle.
     override func viewDidLoad() {
         super.viewDidLoad()
         setupEpisodesCollectionView()
-        getCharacterCount()
-        fetchEpisodes(for: episodesCurrentPage)
+        fetchEpisodesAndCharacters()
     }
+    
     
     @IBAction func unwindToEpisodes(segue: UIStoryboardSegue) {
-//        if let sourceViewController = segue.source as? CharactersViewController {
-//            let sourceCharacter = sourceViewController.
-//            characters.filter { $0.id == sourceCharacter!.id }.first?.status = sourceCharacter!.status
-//            DispatchQueue.main.async { self.charactersCollectionView.reloadData() }
-//        }
+        if let sourceViewController = segue.source as? CharactersViewController {
+            let sourceCharacters = sourceViewController.characters
+            for character in characters {
+                for sourceCharacter in sourceCharacters {
+                    if character.id == sourceCharacter.id {
+                        character.status = sourceCharacter.status
+                    }
+                }
+            }
+        }
     }
     
     
-    // MARK: - Local functions
-    private func fetchEpisodes(for page: Int) {
+    // MARK: - Local methods.
+    private func fetchEpisodesAndCharacters() {
         isLoading = true
         
-        NetworkManager.shared.getEpisodes(for: page) { [weak self] result in
+        NetworkManager.shared.getEpisodes(for: episodesCurrentPage) { [weak self] result in
             guard let self = self else { return }
             
             switch result {
             case .success(let episodesData):
                 self.episodesTotalPages = episodesData.info.pages
                 episodesData.results.forEach { self.episodes.append($0) }
+                self.fetchCharactersCount()
                 
             case .failure(let error):
                 print(error)
+                self.presentAlertOnMainThread(CustomAlert.showEpisodesErrorAlert)
             }
             self.isLoading = false
         }
     }
     
     
-    private func getCharacterCount() {
+    private func fetchCharactersCount() {
         NetworkManager.shared.getCharactersCount { [weak self] result in
             guard let self = self else { return }
             
             switch result {
             case .success(let charactersData):
                 self.charactersCount = charactersData.info.count
-                print(self.charactersCount)
                 self.fetchAllCharacters()
                 
             case .failure(let error):
@@ -78,19 +84,20 @@ class EpisodesViewController: UIViewController  {
     
     
     private func fetchAllCharacters() {
-        var charactersNumbers: String = "1"
+        guard characters.isEmpty else { return }
         
-        for number in 2...charactersCount {
-            charactersNumbers += ",\(number)"
-        }
-
-        NetworkManager.shared.getCharacters(from: charactersNumbers) { [weak self] result in
+        var charactersID: [Int] = []
+        charactersID.append(contentsOf: 1...charactersCount)
+        
+        let charactersIDString: String = charactersID.map { String($0) }.joined(separator: ",")
+        
+        NetworkManager.shared.getCharacters(from: charactersIDString) { [weak self] result in
             guard let self = self else { return }
-            
+
             switch result {
             case .success(let characters):
                 self.characters = characters
-                
+           
             case .failure(let error):
                 print(error)
             }
@@ -98,23 +105,30 @@ class EpisodesViewController: UIViewController  {
     }
     
     
-    private func filterCharacters(by episodeIndex: Int) -> [Character] {
-        let selectedEpisode = episodes.filter { $0.id == episodeIndex }.first
-        let charactersIDs   = selectedEpisode?.characters
+    private func filterEpisodeCharacters(for characterStringsArray: [String]) -> [Character] {
+        var charactersID: [Int] = []
+        var filteredCharacters: [Character] = []
         
-//        let ids = charactersIDs?.inde
+        for characterStrings in characterStringsArray {
+            if let index = characterStrings.lastIndex(of: "/") {
+                let stringID    = characterStrings[characterStrings.index(after: index)...]
+                let integerID   = Int(stringID) ?? 0
+                charactersID.append(integerID)
+            }
+        }
         
-        return [Character]()
+        filteredCharacters = characters.filter { charactersID.contains($0.id) }
+        
+        return filteredCharacters
     }
     
     
-    // MARK: - Segues
+    // MARK: - Segues.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let charactersViewController = segue.destination as? CharactersViewController {
             if let cell = sender as? EpisodesCollectionViewCell,
               let indexPath = self.episodesCollectionView.indexPath(for: cell) {
-                print(episodes[indexPath.row])
-//                charactersViewController.characters           = episodes[indexPath.row].characters
+                charactersViewController.characters           = filterEpisodeCharacters(for: episodes[indexPath.row].characters)
                 charactersViewController.navigationItem.title = episodes[indexPath.row].episode
             }
         }
@@ -123,12 +137,12 @@ class EpisodesViewController: UIViewController  {
 }
 
 
-// MARK: - Extensions
+// MARK: - 2. PROTOCOLS
 // UIViewController conforming protocols functions.
 extension EpisodesViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     private func setupEpisodesCollectionView() {
-        episodesCollectionView.delegate = self
+        episodesCollectionView.delegate   = self
         episodesCollectionView.dataSource = self
     }
     
@@ -139,17 +153,15 @@ extension EpisodesViewController: UICollectionViewDelegate, UICollectionViewData
 
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = episodesCollectionView.dequeueReusableCell(withReuseIdentifier: Constants.Cells.episodeCell, for: indexPath) as! EpisodesCollectionViewCell
-        cell.episodeNumberLabel.text = episodes[indexPath.row].episode
-        cell.episodeTitleLabel.text  = episodes[indexPath.row].name
-        cell.episodeDateLabel.text   = episodes[indexPath.row].airDate
+        let cell = episodesCollectionView.dequeueReusableCell(withReuseIdentifier: Identifier.Cell.episodeCell, for: indexPath) as! EpisodesCollectionViewCell
+        cell.populateCell(with: episodes[indexPath.row])
         return cell
     }
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let saveAreaWidth = view.safeAreaLayoutGuide.layoutFrame.size.width
-        let cellSetup = UserInterfaceHelper.setCell(width: saveAreaWidth, height: Constants.Design.cellHeight, padding: Constants.Design.cellPadding)
+        let cellSetup     = UserInterfaceHelper.setCell(width: saveAreaWidth, height: Design.cellHeight, padding: Design.cellPadding)
         return cellSetup
     }
     
@@ -164,7 +176,7 @@ extension EpisodesViewController: UICollectionViewDelegate, UICollectionViewData
             episodesCurrentPage < episodesTotalPages else { return }
 
             episodesCurrentPage += 1
-            fetchEpisodes(for: episodesCurrentPage)
+            fetchEpisodesAndCharacters()
         }
     }
 

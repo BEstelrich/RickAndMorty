@@ -14,4 +14,10 @@ class CharactersCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var characterImage: CharacterImageView!
     @IBOutlet weak var characterStatusImage: UIImageView!
     
+    
+    func populateCell(with character: Character) {
+        characterNameLabel.text    = character.name
+        characterStatusImage.image = character.status.rawValue == "Alive" ? Image.aliveStatusImage : character.status.rawValue == "Dead" ? Image.deadStatusImage : Image.unknownStatusImage
+        characterImage.downloadImage(fromURL: character.image)
+    }
 }

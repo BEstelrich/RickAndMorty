@@ -8,15 +8,16 @@
 
 import UIKit
 
+// MARK: - 1. VIEWCONTROLLER
 class CharactersViewController: UIViewController {
     
-    // MARK: - IBOutlets
+    // MARK: - IBOutlets and properties.
     @IBOutlet weak var charactersCollectionView: UICollectionView!
     
-    var characters: [Character] = [] { didSet { DispatchQueue.main.async { self.charactersCollectionView.reloadData() } } }
+    var characters: [Character] = []
     
     
-    // MARK: - ViewController lifecycle
+    // MARK: - ViewController lifecycle.
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCharactersCollectionView()
@@ -32,7 +33,7 @@ class CharactersViewController: UIViewController {
     }
     
     
-    // MARK: - Segues
+    // MARK: - Segues.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let detailsViewController = segue.destination as? DetailsViewController {
             if let cell = sender as? CharactersCollectionViewCell,
@@ -46,9 +47,7 @@ class CharactersViewController: UIViewController {
 }
 
 
-
-
-// MARK: - Extensions
+// MARK: - 2. PROTOCOLS
 // UIViewController conforming protocols functions.
 extension CharactersViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
@@ -64,10 +63,8 @@ extension CharactersViewController: UICollectionViewDelegate, UICollectionViewDa
 
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = charactersCollectionView.dequeueReusableCell(withReuseIdentifier: Constants.Cells.characterCell, for: indexPath) as! CharactersCollectionViewCell
-        cell.characterNameLabel.text    = characters[indexPath.row].name
-        cell.characterStatusImage.image = characters[indexPath.row].status.rawValue == "Alive" ? Constants.Images.aliveStatusImage : characters[indexPath.row].status.rawValue == "Dead" ? Constants.Images.deadStatusImage : Constants.Images.unknownStatusImage
-        cell.characterImage.downloadImage(fromURL: characters[indexPath.row].image)
+        let cell = charactersCollectionView.dequeueReusableCell(withReuseIdentifier: Identifier.Cell.characterCell, for: indexPath) as! CharactersCollectionViewCell
+        cell.populateCell(with: characters[indexPath.row])
         return cell
     }
     

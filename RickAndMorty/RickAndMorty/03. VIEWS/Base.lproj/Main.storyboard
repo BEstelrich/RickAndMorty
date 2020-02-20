@@ -42,7 +42,6 @@
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TITLE" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="crK-1m-Adi">
                                                                     <rect key="frame" x="0.0" y="0.0" width="45.666666666666664" height="20.333333333333332"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                                    <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="egq-8j-XtV">
@@ -54,7 +53,7 @@
                                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="a32-QP-MAj"/>
                                                                             </constraints>
                                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                                                            <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                            <color key="textColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="DATE" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K1m-3T-0uv">
@@ -79,7 +78,7 @@
                                                             </constraints>
                                                         </stackView>
                                                     </subviews>
-                                                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="backgroundColor" systemColor="quaternaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.17999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="2fw-6R-N08"/>
                                                         <constraint firstItem="HUS-Nk-xms" firstAttribute="leading" secondItem="pmh-NF-dhZ" secondAttribute="leading" constant="20" id="b09-8j-TA5"/>
@@ -89,7 +88,7 @@
                                                 </view>
                                             </subviews>
                                         </view>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="pmh-NF-dhZ" secondAttribute="bottom" id="7AL-0H-KKV"/>
                                             <constraint firstItem="pmh-NF-dhZ" firstAttribute="leading" secondItem="vgZ-8K-AdH" secondAttribute="leading" priority="900" id="8Cp-34-Xg0"/>
@@ -108,7 +107,7 @@
                                 </cells>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="OGf-6D-9N5" secondAttribute="bottom" id="225-cI-eBd"/>
                             <constraint firstItem="OGf-6D-9N5" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="2eO-1X-id7"/>
@@ -136,7 +135,7 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="f3Y-zn-bbo">
                                 <rect key="frame" x="0.0" y="88" width="414" height="808"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="iNw-h2-ZIb">
                                     <size key="itemSize" width="125" height="150"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -154,7 +153,6 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Character Name" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wtI-Mm-HnZ">
                                                     <rect key="frame" x="0.0" y="125" width="125" height="25"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QH5-pY-raX" customClass="CharacterImageView" customModule="RickAndMorty" customModuleProvider="target">
@@ -172,7 +170,7 @@
                                                 </imageView>
                                             </subviews>
                                         </view>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <color key="backgroundColor" systemColor="quaternaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.17999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="wtI-Mm-HnZ" secondAttribute="bottom" id="4lQ-40-EP8"/>
                                             <constraint firstItem="7Km-jw-lN1" firstAttribute="top" secondItem="o9y-99-y0R" secondAttribute="top" id="8og-mD-XSN"/>
@@ -194,7 +192,7 @@
                                 </cells>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="f3Y-zn-bbo" firstAttribute="leading" secondItem="p3w-Sh-RBd" secondAttribute="leading" id="Kip-ht-f9Y"/>
                             <constraint firstItem="f3Y-zn-bbo" firstAttribute="trailing" secondItem="p3w-Sh-RBd" secondAttribute="trailing" id="NV7-Pp-5gd"/>
@@ -203,12 +201,20 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="p3w-Sh-RBd"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Episode Characters" id="S33-bW-ezF"/>
+                    <navigationItem key="navigationItem" title="Episode Characters" id="S33-bW-ezF">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="Chevron" id="2ey-LV-LKt">
+                            <connections>
+                                <segue destination="YNg-4D-SzO" kind="unwind" unwindAction="unwindToEpisodesWithSegue:" id="4De-K6-FbQ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="charactersCollectionView" destination="f3Y-zn-bbo" id="Xht-VO-4wv"/>
+                        <segue destination="YNg-4D-SzO" kind="unwind" identifier="UnwindToEpisodesWithSegue" unwindAction="unwindToEpisodesWithSegue:" id="emm-lW-AuN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="flj-hR-ubo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="YNg-4D-SzO" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2528.985507246377" y="-535.04464285714278"/>
         </scene>
@@ -216,7 +222,7 @@
         <scene sceneID="Uq1-Ig-Mkl">
             <objects>
                 <viewController storyboardIdentifier="DetailsViewController" title="DetailsViewController" id="ebi-fO-43g" customClass="DetailsViewController" customModule="RickAndMorty" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="GLc-sX-lW0">
+                    <view key="view" contentMode="scaleToFill" id="GLc-sX-lW0" customClass="CharacterDetailsView" customModule="RickAndMorty" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -263,7 +269,6 @@
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x2n-z3-oJl">
                                                         <rect key="frame" x="0.0" y="0.0" width="325" height="24"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                                        <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
@@ -391,7 +396,7 @@
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="AHn-S8-pKy" firstAttribute="top" secondItem="rDg-mZ-17w" secondAttribute="top" constant="50" id="090-tQ-AiN"/>
                             <constraint firstItem="JV9-Ix-IGj" firstAttribute="leading" secondItem="GLc-sX-lW0" secondAttribute="leading" id="4nW-cU-5jR"/>
@@ -402,19 +407,27 @@
                             <constraint firstAttribute="bottom" secondItem="JV9-Ix-IGj" secondAttribute="bottom" id="r7X-k3-qkQ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="rDg-mZ-17w"/>
+                        <connections>
+                            <outlet property="changeCharacterStatusButton" destination="JV9-Ix-IGj" id="8HX-o5-iRM"/>
+                            <outlet property="characterAvatarImage" destination="JNk-3f-gDT" id="xcd-sP-pCk"/>
+                            <outlet property="characterGenderLabel" destination="4ZP-yY-SeW" id="cra-Oz-oDA"/>
+                            <outlet property="characterLocationLabel" destination="DET-ZN-dVC" id="ReR-Jd-2Oo"/>
+                            <outlet property="characterNameLabel" destination="x2n-z3-oJl" id="4oh-tw-3AD"/>
+                            <outlet property="characterOriginLabel" destination="rJw-XH-Jx4" id="fZx-UI-vij"/>
+                            <outlet property="characterSpeciesLabel" destination="qun-iG-FUk" id="Ro2-Q0-qFA"/>
+                            <outlet property="characterStatusImage" destination="Hwz-WF-PkF" id="GlZ-be-QzK"/>
+                            <outlet property="characterStatusLabel" destination="BXN-2H-HhD" id="ODv-S4-6ig"/>
+                            <outlet property="characterTypeLabel" destination="lUs-ka-pYB" id="5gy-fc-eZ3"/>
+                        </connections>
                     </view>
-                    <navigationItem key="navigationItem" title="Character Details" id="FCz-gp-Ij8"/>
+                    <navigationItem key="navigationItem" title="Character Details" id="FCz-gp-Ij8">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="Chevron" id="4ff-DI-8Y7">
+                            <connections>
+                                <segue destination="dK0-XZ-y7G" kind="unwind" unwindAction="unwindToCharactersWithSegue:" id="AE3-PP-8cQ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
-                        <outlet property="changeCharacterStatusButton" destination="JV9-Ix-IGj" id="3kS-Mf-BTt"/>
-                        <outlet property="characterAvatarImage" destination="JNk-3f-gDT" id="ZSN-Lf-ElT"/>
-                        <outlet property="characterGenderLabel" destination="4ZP-yY-SeW" id="tiX-b0-WC5"/>
-                        <outlet property="characterLocationLabel" destination="DET-ZN-dVC" id="1mg-07-mOW"/>
-                        <outlet property="characterNameLabel" destination="x2n-z3-oJl" id="Oya-DB-d5I"/>
-                        <outlet property="characterOriginLabel" destination="rJw-XH-Jx4" id="DbD-Nd-Yua"/>
-                        <outlet property="characterSpeciesLabel" destination="qun-iG-FUk" id="dwT-Rs-yvm"/>
-                        <outlet property="characterStatusImage" destination="Hwz-WF-PkF" id="WS6-A3-tI9"/>
-                        <outlet property="characterStatusLabel" destination="BXN-2H-HhD" id="GhP-tK-R6O"/>
-                        <outlet property="characterTypeLabel" destination="lUs-ka-pYB" id="1zR-vJ-4ab"/>
                         <segue destination="dK0-XZ-y7G" kind="unwind" identifier="UnwindToCharactersWithSegue" unwindAction="unwindToCharactersWithSegue:" id="rDr-DI-LRo"/>
                     </connections>
                 </viewController>
@@ -444,6 +457,7 @@
     </scenes>
     <resources>
         <image name="AliveStatusImage" width="1000" height="1000"/>
+        <image name="Chevron" width="8" height="15"/>
         <image name="Placeholder" width="1500" height="1500"/>
     </resources>
 </document>

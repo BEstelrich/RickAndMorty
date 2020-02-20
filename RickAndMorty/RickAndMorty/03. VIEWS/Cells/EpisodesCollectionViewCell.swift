@@ -14,4 +14,10 @@ class EpisodesCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var episodeTitleLabel: UILabel!
     @IBOutlet weak var episodeDateLabel: UILabel!
     
+    
+    func populateCell(with episode: Episode) {
+        episodeNumberLabel.text = episode.episode
+        episodeTitleLabel.text  = episode.name
+        episodeDateLabel.text   = episode.airDate
+    }
 }
