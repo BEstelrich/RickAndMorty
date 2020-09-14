@@ -1,13 +1,15 @@
-<!-- Header -->
+<!-- HEADER -->
 <img src="./Assets/AppIcon.png" width="60" align="right"/>
 <h1>Rick and Morty</h1>
 
-[![Swift](https://img.shields.io/badge/Swift-5.0-orange.svg?longCache=true&style=flat&logo=swift)](https://www.swift.org)
-[![iOS](https://img.shields.io/badge/iOS-12.4+-lightgrey.svg?longCache=true&?style=flat&logo=apple)](https://developer.apple.com/ios/)
-[![](https://img.shields.io/badge/@BEstelrichS-1A94E0.svg?logoColor=white&logo=twitter)](https://twitter.com/BEstelrichS)
+[![Swift](https://img.shields.io/badge/Swift-5.0-orange.svg?longCache=true&style=flat&logo=swift)][Swift]
+[![iOS](https://img.shields.io/badge/iOS-12.4+-lightgrey.svg?longCache=true&?style=flat&logo=apple)][iOS]
+[![](https://img.shields.io/badge/@BEstelrich-1A94E0.svg?logoColor=white&logo=twitter)][Twitter]
 
 
-<!-- Body -->
+
+
+<!-- BODY -->
 ## Documentation
 - [Rick and Morthy API](https://rickandmortyapi.com)
 
@@ -33,4 +35,10 @@ Those are the most relevant screenshots of the project.
 </p>
 
 
-<!-- Footer -->
+
+
+<!-- FOOTER -->
+<!-- Permanent links -->
+[Swift]: https://www.swift.org
+[iOS]: https://developer.apple.com/ios/
+[Twitter]: https://twitter.com/BEstelrich
